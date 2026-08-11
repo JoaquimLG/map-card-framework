@@ -1,6 +1,8 @@
 package br.edu.uepb.map.framework.baralho;
 
 import br.edu.uepb.map.framework.cartas.Carta;
+import br.edu.uepb.map.framework.excecoes.BaralhoVazioException;
+import br.edu.uepb.map.framework.excecoes.CartasInsuficientesException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,5 +83,52 @@ public class Baralho<T extends Carta> {
      */
     public List<T> getCartas() {
         return List.copyOf(cartas);
+    }
+
+    /**
+     * Remove e retorna a carta no topo do baralho.
+     *
+     * @return carta que ocupava o topo
+     * @throws BaralhoVazioException se o baralho estiver vazio
+     */
+    public T comprar() {
+        if (cartas.isEmpty()) {
+            throw new BaralhoVazioException();
+        }
+        return cartas.remove(cartas.size() - 1);
+    }
+
+    /**
+     * Remove e retorna cartas consecutivas do topo, na ordem em que sao compradas.
+     *
+     * @param quantidade numero de cartas a comprar
+     * @return cartas compradas, com a antiga carta do topo na primeira posicao
+     * @throws IllegalArgumentException se a quantidade nao for positiva
+     * @throws CartasInsuficientesException se a quantidade exceder as cartas disponiveis;
+     *         nesse caso, o baralho nao e alterado
+     */
+    public List<T> comprar(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("quantidade deve ser positiva");
+        }
+        if (quantidade > cartas.size()) {
+            throw new CartasInsuficientesException(quantidade, cartas.size());
+        }
+        List<T> compradas = new ArrayList<>();
+        for (int indice = 0; indice < quantidade; indice++) {
+            compradas.add(comprar());
+        }
+        return List.copyOf(compradas);
+    }
+
+    /**
+     * Remove somente a primeira ocorrencia igual a carta informada.
+     *
+     * @param carta carta cuja primeira ocorrencia deve ser removida
+     * @return {@code true} se uma ocorrencia foi removida; {@code false} se estava ausente
+     * @throws NullPointerException se a carta for nula
+     */
+    public boolean remover(T carta) {
+        return cartas.remove(Objects.requireNonNull(carta, "carta nao pode ser nula"));
     }
 }

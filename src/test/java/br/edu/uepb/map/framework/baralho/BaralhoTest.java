@@ -1,6 +1,8 @@
 package br.edu.uepb.map.framework.baralho;
 
 import br.edu.uepb.map.framework.cartas.Carta;
+import br.edu.uepb.map.framework.excecoes.BaralhoVazioException;
+import br.edu.uepb.map.framework.excecoes.CartasInsuficientesException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -61,6 +63,7 @@ class BaralhoTest {
         assertThrows(NullPointerException.class, () -> baralho.adicionar((List<CartaDeMemoria>) null));
         assertThrows(NullPointerException.class,
                 () -> baralho.adicionar(java.util.Arrays.asList(nova, null)));
+        assertThrows(NullPointerException.class, () -> baralho.remover(null));
 
         assertEquals(List.of(existente), baralho.getCartas());
     }
@@ -77,6 +80,105 @@ class BaralhoTest {
 
         assertEquals(List.of(primeira), consulta);
         assertEquals(List.of(primeira, segunda), baralho.getCartas());
+    }
+
+    @Test
+    void compraCartaDoTopoEAtualizaOEstado() {
+        CartaDeMemoria primeira = new CartaDeMemoria("primeira");
+        CartaDeMemoria topo = new CartaDeMemoria("topo");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, topo));
+
+        CartaDeMemoria comprada = baralho.comprar();
+
+        assertEquals(topo, comprada);
+        assertEquals(List.of(primeira), baralho.getCartas());
+        assertEquals(1, baralho.getQuantidade());
+        assertFalse(baralho.estaVazio());
+    }
+
+    @Test
+    void comprarUltimaCartaDeixaBaralhoVazio() {
+        CartaDeMemoria unica = new CartaDeMemoria("unica");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(unica));
+
+        assertEquals(unica, baralho.comprar());
+        assertEquals(0, baralho.getQuantidade());
+        assertTrue(baralho.estaVazio());
+    }
+
+    @Test
+    void comprarDeBaralhoVazioLancaExcecaoEspecifica() {
+        Baralho<CartaDeMemoria> baralho = new Baralho<>();
+
+        assertThrows(BaralhoVazioException.class, baralho::comprar);
+
+        assertTrue(baralho.estaVazio());
+        assertEquals(0, baralho.getQuantidade());
+    }
+
+    @Test
+    void compraVariasCartasNaOrdemDoTopo() {
+        CartaDeMemoria primeira = new CartaDeMemoria("primeira");
+        CartaDeMemoria segunda = new CartaDeMemoria("segunda");
+        CartaDeMemoria topo = new CartaDeMemoria("topo");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, segunda, topo));
+
+        List<CartaDeMemoria> compradas = baralho.comprar(2);
+
+        assertEquals(List.of(topo, segunda), compradas);
+        assertEquals(List.of(primeira), baralho.getCartas());
+        assertEquals(1, baralho.getQuantidade());
+    }
+
+    @Test
+    void compraInsuficienteLancaExcecaoEspecificaSemAlterarOBaralho() {
+        CartaDeMemoria primeira = new CartaDeMemoria("primeira");
+        CartaDeMemoria topo = new CartaDeMemoria("topo");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, topo));
+
+        assertThrows(CartasInsuficientesException.class, () -> baralho.comprar(3));
+
+        assertEquals(List.of(primeira, topo), baralho.getCartas());
+        assertEquals(2, baralho.getQuantidade());
+        assertFalse(baralho.estaVazio());
+    }
+
+    @Test
+    void rejeitaQuantidadeDeCompraNaoPositivaSemAlterarOBaralho() {
+        CartaDeMemoria carta = new CartaDeMemoria("carta");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(carta));
+
+        assertThrows(IllegalArgumentException.class, () -> baralho.comprar(0));
+        assertThrows(IllegalArgumentException.class, () -> baralho.comprar(-1));
+
+        assertEquals(List.of(carta), baralho.getCartas());
+        assertEquals(1, baralho.getQuantidade());
+    }
+
+    @Test
+    void removeSomenteAPrimeiraOcorrenciaIgual() {
+        CartaDeMemoria repetida = new CartaDeMemoria("repetida");
+        CartaDeMemoria outra = new CartaDeMemoria("outra");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(repetida, outra,
+                new CartaDeMemoria("repetida")));
+
+        boolean removeu = baralho.remover(repetida);
+
+        assertTrue(removeu);
+        assertEquals(List.of(outra, repetida), baralho.getCartas());
+        assertEquals(2, baralho.getQuantidade());
+    }
+
+    @Test
+    void removerCartaAusenteRetornaFalsoSemAlterarOBaralho() {
+        CartaDeMemoria existente = new CartaDeMemoria("existente");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(existente));
+
+        boolean removeu = baralho.remover(new CartaDeMemoria("ausente"));
+
+        assertFalse(removeu);
+        assertEquals(List.of(existente), baralho.getCartas());
+        assertEquals(1, baralho.getQuantidade());
     }
 
     private record CartaDeMemoria(String descricao) implements Carta {
