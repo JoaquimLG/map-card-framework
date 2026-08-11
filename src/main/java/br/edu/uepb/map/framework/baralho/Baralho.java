@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.random.RandomGenerator;
 
 /**
  * Colecao generica de cartas que preserva a ordem e aceita duplicatas.
@@ -130,5 +132,28 @@ public class Baralho<T extends Carta> {
      */
     public boolean remover(T carta) {
         return cartas.remove(Objects.requireNonNull(carta, "carta nao pode ser nula"));
+    }
+
+    /**
+     * Embaralha as cartas usando a fonte de aleatoriedade do ambiente.
+     */
+    public void embaralhar() {
+        embaralhar(ThreadLocalRandom.current());
+    }
+
+    /**
+     * Embaralha as cartas usando a fonte de aleatoriedade informada.
+     *
+     * @param aleatoriedade fonte usada para escolher as trocas
+     * @throws NullPointerException se a fonte de aleatoriedade for nula
+     */
+    public void embaralhar(RandomGenerator aleatoriedade) {
+        Objects.requireNonNull(aleatoriedade, "aleatoriedade nao pode ser nula");
+        for (int indice = cartas.size(); indice > 1; indice--) {
+            int destino = aleatoriedade.nextInt(indice);
+            T carta = cartas.get(indice - 1);
+            cartas.set(indice - 1, cartas.get(destino));
+            cartas.set(destino, carta);
+        }
     }
 }

@@ -5,8 +5,10 @@ import br.edu.uepb.map.framework.excecoes.BaralhoVazioException;
 import br.edu.uepb.map.framework.excecoes.CartasInsuficientesException;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,6 +16,58 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BaralhoTest {
+
+    @Test
+    void embaralhaDeModoReproduzivelComFonteControlada() {
+        CartaDeMemoria primeira = new CartaDeMemoria("primeira");
+        CartaDeMemoria segunda = new CartaDeMemoria("segunda");
+        CartaDeMemoria terceira = new CartaDeMemoria("terceira");
+        CartaDeMemoria quarta = new CartaDeMemoria("quarta");
+        Baralho<CartaDeMemoria> primeiro = new Baralho<>(List.of(primeira, segunda, terceira, quarta));
+        Baralho<CartaDeMemoria> segundo = new Baralho<>(List.of(primeira, segunda, terceira, quarta));
+
+        primeiro.embaralhar(new Random(7));
+        segundo.embaralhar(new Random(7));
+
+        assertEquals(List.of(primeira, segunda, quarta, terceira), primeiro.getCartas());
+        assertEquals(primeiro.getCartas(), segundo.getCartas());
+    }
+
+    @Test
+    void embaralhamentoComumPreservaQuantidadeEOcorrenciasInclusiveDuplicatas() {
+        CartaDeMemoria repetida = new CartaDeMemoria("repetida");
+        CartaDeMemoria outra = new CartaDeMemoria("outra");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(repetida, outra, repetida));
+
+        baralho.embaralhar();
+
+        assertEquals(3, baralho.getQuantidade());
+        assertEquals(2, Collections.frequency(baralho.getCartas(), repetida));
+        assertEquals(1, Collections.frequency(baralho.getCartas(), outra));
+    }
+
+    @Test
+    void rejeitaFonteDeAleatoriedadeNulaSemAlterarOBaralho() {
+        CartaDeMemoria carta = new CartaDeMemoria("carta");
+        Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(carta));
+
+        assertThrows(NullPointerException.class, () -> baralho.embaralhar(null));
+
+        assertEquals(List.of(carta), baralho.getCartas());
+    }
+
+    @Test
+    void embaralhaBaralhosVazioEComUmaCartaSemAlteracaoIndevida() {
+        CartaDeMemoria unica = new CartaDeMemoria("unica");
+        Baralho<CartaDeMemoria> vazio = new Baralho<>();
+        Baralho<CartaDeMemoria> unitario = new Baralho<>(List.of(unica));
+
+        vazio.embaralhar(new Random(7));
+        unitario.embaralhar(new Random(7));
+
+        assertEquals(List.of(), vazio.getCartas());
+        assertEquals(List.of(unica), unitario.getCartas());
+    }
 
     @Test
     void baralhoVazioInformaQuantidadeZeroEEstadoVazio() {
