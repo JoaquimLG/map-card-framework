@@ -17,7 +17,7 @@ class FabricaBaralhoTradicionalTest {
 
         Baralho<CartaTradicional> baralho = fabrica.criar();
 
-        assertEquals(52, baralho.getQuantidade());
+        assertEquals(52, baralho.tamanho());
         for (Naipe naipe : Naipe.values()) {
             for (Valor valor : Valor.values()) {
                 assertEquals(1, Collections.frequency(

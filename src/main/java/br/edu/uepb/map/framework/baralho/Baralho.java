@@ -65,7 +65,7 @@ public class Baralho<T extends Carta> {
      *
      * @return quantidade de cartas armazenadas
      */
-    public int getQuantidade() {
+    public int tamanho() {
         return cartas.size();
     }
 
@@ -93,7 +93,7 @@ public class Baralho<T extends Carta> {
      * @return carta que ocupava o topo
      * @throws BaralhoVazioException se o baralho estiver vazio
      */
-    public T comprar() {
+    public T comprarCarta() {
         if (cartas.isEmpty()) {
             throw new BaralhoVazioException();
         }
@@ -109,7 +109,7 @@ public class Baralho<T extends Carta> {
      * @throws CartasInsuficientesException se a quantidade exceder as cartas disponiveis;
      *         nesse caso, o baralho nao e alterado
      */
-    public List<T> comprar(int quantidade) {
+    public List<T> comprarCartas(int quantidade) {
         if (quantidade <= 0) {
             throw new IllegalArgumentException("quantidade deve ser positiva");
         }
@@ -118,7 +118,7 @@ public class Baralho<T extends Carta> {
         }
         List<T> compradas = new ArrayList<>();
         for (int indice = 0; indice < quantidade; indice++) {
-            compradas.add(comprar());
+            compradas.add(comprarCarta());
         }
         return List.copyOf(compradas);
     }

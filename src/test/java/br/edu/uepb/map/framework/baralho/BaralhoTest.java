@@ -41,7 +41,7 @@ class BaralhoTest {
 
         baralho.embaralhar();
 
-        assertEquals(3, baralho.getQuantidade());
+        assertEquals(3, baralho.tamanho());
         assertEquals(2, Collections.frequency(baralho.getCartas(), repetida));
         assertEquals(1, Collections.frequency(baralho.getCartas(), outra));
     }
@@ -73,7 +73,7 @@ class BaralhoTest {
     void baralhoVazioInformaQuantidadeZeroEEstadoVazio() {
         Baralho<CartaDeMemoria> baralho = new Baralho<>();
 
-        assertEquals(0, baralho.getQuantidade());
+        assertEquals(0, baralho.tamanho());
         assertTrue(baralho.estaVazio());
         assertEquals(List.of(), baralho.getCartas());
     }
@@ -88,7 +88,7 @@ class BaralhoTest {
         composicao.clear();
 
         assertEquals(List.of(primeira, segunda, primeira), baralho.getCartas());
-        assertEquals(3, baralho.getQuantidade());
+        assertEquals(3, baralho.tamanho());
     }
 
     @Test
@@ -101,7 +101,7 @@ class BaralhoTest {
         baralho.adicionar(List.of(segunda, primeira));
 
         assertEquals(List.of(primeira, segunda, primeira), baralho.getCartas());
-        assertEquals(3, baralho.getQuantidade());
+        assertEquals(3, baralho.tamanho());
         assertFalse(baralho.estaVazio());
     }
 
@@ -142,11 +142,11 @@ class BaralhoTest {
         CartaDeMemoria topo = new CartaDeMemoria("topo");
         Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, topo));
 
-        CartaDeMemoria comprada = baralho.comprar();
+        CartaDeMemoria comprada = baralho.comprarCarta();
 
         assertEquals(topo, comprada);
         assertEquals(List.of(primeira), baralho.getCartas());
-        assertEquals(1, baralho.getQuantidade());
+        assertEquals(1, baralho.tamanho());
         assertFalse(baralho.estaVazio());
     }
 
@@ -155,8 +155,8 @@ class BaralhoTest {
         CartaDeMemoria unica = new CartaDeMemoria("unica");
         Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(unica));
 
-        assertEquals(unica, baralho.comprar());
-        assertEquals(0, baralho.getQuantidade());
+        assertEquals(unica, baralho.comprarCarta());
+        assertEquals(0, baralho.tamanho());
         assertTrue(baralho.estaVazio());
     }
 
@@ -164,10 +164,10 @@ class BaralhoTest {
     void comprarDeBaralhoVazioLancaExcecaoEspecifica() {
         Baralho<CartaDeMemoria> baralho = new Baralho<>();
 
-        assertThrows(BaralhoVazioException.class, baralho::comprar);
+        assertThrows(BaralhoVazioException.class, baralho::comprarCarta);
 
         assertTrue(baralho.estaVazio());
-        assertEquals(0, baralho.getQuantidade());
+        assertEquals(0, baralho.tamanho());
     }
 
     @Test
@@ -177,11 +177,11 @@ class BaralhoTest {
         CartaDeMemoria topo = new CartaDeMemoria("topo");
         Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, segunda, topo));
 
-        List<CartaDeMemoria> compradas = baralho.comprar(2);
+        List<CartaDeMemoria> compradas = baralho.comprarCartas(2);
 
         assertEquals(List.of(topo, segunda), compradas);
         assertEquals(List.of(primeira), baralho.getCartas());
-        assertEquals(1, baralho.getQuantidade());
+        assertEquals(1, baralho.tamanho());
     }
 
     @Test
@@ -190,10 +190,10 @@ class BaralhoTest {
         CartaDeMemoria topo = new CartaDeMemoria("topo");
         Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(primeira, topo));
 
-        assertThrows(CartasInsuficientesException.class, () -> baralho.comprar(3));
+        assertThrows(CartasInsuficientesException.class, () -> baralho.comprarCartas(3));
 
         assertEquals(List.of(primeira, topo), baralho.getCartas());
-        assertEquals(2, baralho.getQuantidade());
+        assertEquals(2, baralho.tamanho());
         assertFalse(baralho.estaVazio());
     }
 
@@ -202,11 +202,11 @@ class BaralhoTest {
         CartaDeMemoria carta = new CartaDeMemoria("carta");
         Baralho<CartaDeMemoria> baralho = new Baralho<>(List.of(carta));
 
-        assertThrows(IllegalArgumentException.class, () -> baralho.comprar(0));
-        assertThrows(IllegalArgumentException.class, () -> baralho.comprar(-1));
+        assertThrows(IllegalArgumentException.class, () -> baralho.comprarCartas(0));
+        assertThrows(IllegalArgumentException.class, () -> baralho.comprarCartas(-1));
 
         assertEquals(List.of(carta), baralho.getCartas());
-        assertEquals(1, baralho.getQuantidade());
+        assertEquals(1, baralho.tamanho());
     }
 
     @Test
@@ -220,7 +220,7 @@ class BaralhoTest {
 
         assertTrue(removeu);
         assertEquals(List.of(outra, repetida), baralho.getCartas());
-        assertEquals(2, baralho.getQuantidade());
+        assertEquals(2, baralho.tamanho());
     }
 
     @Test
@@ -232,7 +232,7 @@ class BaralhoTest {
 
         assertFalse(removeu);
         assertEquals(List.of(existente), baralho.getCartas());
-        assertEquals(1, baralho.getQuantidade());
+        assertEquals(1, baralho.tamanho());
     }
 
     private record CartaDeMemoria(String descricao) implements Carta {
