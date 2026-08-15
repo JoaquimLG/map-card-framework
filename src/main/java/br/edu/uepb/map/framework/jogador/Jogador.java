@@ -27,7 +27,7 @@ public abstract class Jogador {
         return ativo;
     }
 
-    protected void desativar() {
+    public void desativar() {
         this.ativo = false;
     }
 
