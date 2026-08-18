@@ -24,6 +24,14 @@ public class ExecutorDeJogadaBlackjack<T extends Carta> implements ExecutorDeJog
     private final CalculadoraDeMao calculadora = new CalculadoraDeMao();
     private final NotificadorEventos notificador;
 
+    /**
+     * Cria um executor que notifica os eventos de compra/estouro/parada
+     * através do notificador informado.
+     *
+     * @param notificador notificador usado para disparar os eventos
+     *                    de cada efeito aplicado
+     * @throws NullPointerException se o notificador for {@code null}
+     */
     public ExecutorDeJogadaBlackjack(NotificadorEventos notificador) {
         this.notificador = Objects.requireNonNull(notificador, "notificador nao pode ser nulo");
     }

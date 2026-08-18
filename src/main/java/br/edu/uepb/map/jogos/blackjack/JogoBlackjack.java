@@ -32,10 +32,28 @@ public class JogoBlackjack {
     private final CalculadoraDeMao calculadora = new CalculadoraDeMao();
     private final Pontuacao pontuacao = new Pontuacao();
 
+    /**
+     * Cria uma nova instância do jogo, lendo a entrada do jogador
+     * humano de {@code System.in}.
+     */
+    public JogoBlackjack() {
+    }
+
+    /**
+     * Ponto de entrada da aplicação: cria o jogo e inicia o loop de
+     * rodadas no console.
+     *
+     * @param args argumentos de linha de comando, não utilizados
+     */
     public static void main(String[] args) {
         new JogoBlackjack().jogar();
     }
 
+    /**
+     * Roda o jogo no console: joga rodadas de Blackjack em sequência,
+     * perguntando após cada uma se o jogador quer continuar, e exibe
+     * o placar acumulado ao final.
+     */
     public void jogar() {
         System.out.println("=== BLACKJACK ===");
         System.out.println("Regras: peça carta ('c') ou pare ('p'). Quem chegar mais perto de 21 sem estourar vence.");

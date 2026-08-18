@@ -8,5 +8,13 @@ package br.edu.uepb.map.framework.eventos;
 
 @FunctionalInterface
 public interface OuvinteEvento {
+
+    /**
+     * Chamado pelo {@link NotificadorEventos} sempre que um evento é
+     * notificado, para que este ouvinte reaja da forma que julgar
+     * adequada (ex.: exibir no console, registrar em log).
+     *
+     * @param evento evento notificado
+     */
     void aoReceberEvento(Evento evento);
 }
