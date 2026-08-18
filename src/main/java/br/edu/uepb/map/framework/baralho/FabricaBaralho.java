@@ -3,20 +3,33 @@ package br.edu.uepb.map.framework.baralho;
 import br.edu.uepb.map.framework.cartas.Carta;
 
 /**
- * Ponto de extensao para composicoes completas de baralhos.
+ * Fábrica abstrata responsável pela criação de baralhos.
  *
- * @param <T> subtipo de carta produzido pela fabrica
+ * @param <T> subtipo de carta produzido pela fábrica
  */
-@FunctionalInterface
-public interface FabricaBaralho<T extends Carta> {
+public abstract class FabricaBaralho<T extends Carta> {
 
     /**
-     * Cria um novo baralho com a composicao definida pela fabrica.
+     * Cria um novo baralho.
      *
-     * <p>Cada chamada deve devolver um baralho independente e mutavel pelas
-     * operacoes publicas de {@link Baralho}.</p>
+     * <p>O algoritmo de criação é definido nesta classe,
+     * enquanto a composição das cartas é definida pelas subclasses.</p>
      *
      * @return novo baralho completo, nunca {@code null}
      */
-    Baralho<T> criar();
+    public final Baralho<T> criar() {
+        Baralho<T> baralho = new Baralho<>();
+        adicionarCartas(baralho);
+        return baralho;
+    }
+
+    /**
+     * Define as cartas que devem compor o baralho.
+     *
+     * <p>Este é o ponto de extensão utilizado pelas subclasses
+     * para definir a composição específica do baralho.</p>
+     *
+     * @param baralho baralho que receberá as cartas
+     */
+    protected abstract void adicionarCartas(Baralho<T> baralho);
 }

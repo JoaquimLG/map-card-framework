@@ -85,13 +85,13 @@ public class JogoBlackjack {
         pontuacao.registrarParticipante(jogador);
         pontuacao.registrarParticipante(banca);
 
-        Partida<CartaTradicional> partida = new Partida<>(
-                jogadores,
-                baralho,
-                new RegraBlackjack(),
-                new ExecutorDeJogadaBlackjack<>(notificador));
+        Partida<CartaTradicional> partida = new PartidaBlackjack<>(
+        jogadores,
+        baralho,
+        new RegraBlackjack(),
+        new ExecutorDeJogadaBlackjack<>(notificador));
 
-        partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
+partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
         notificador.notificar(new Evento(TipoEvento.PARTIDA_INICIADA, "nova rodada de Blackjack"));
 
         System.out.println();

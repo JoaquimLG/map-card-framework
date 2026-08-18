@@ -1,5 +1,11 @@
 package br.edu.uepb.map.jogos.blackjack;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+
 import br.edu.uepb.map.framework.baralho.Baralho;
 import br.edu.uepb.map.framework.cartas.Carta;
 import br.edu.uepb.map.framework.eventos.NotificadorEventos;
@@ -8,12 +14,6 @@ import br.edu.uepb.map.framework.jogador.Jogador;
 import br.edu.uepb.map.framework.jogador.JogadorAutomatico;
 import br.edu.uepb.map.framework.jogador.MaoDeCartas;
 import br.edu.uepb.map.framework.partida.Partida;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TratamentoDeExcecoesBlackjackTest {
 
@@ -47,7 +47,7 @@ class TratamentoDeExcecoesBlackjackTest {
 
         Jogador jogador = new JogadorAutomatico(
                 "Jogador", new MaoDeCartas<>(), ignorado -> new JogadaBlackjack("PARAR"));
-        Partida<Carta> partida = new Partida<>(List.of(jogador), new Baralho<>(),
+        Partida<Carta> partida = new PartidaBlackjack<>(List.of(jogador), new Baralho<>(),
                 new RegraBlackjack(), new ExecutorDeJogadaBlackjack<>(new NotificadorEventos()));
         Jogada incompativel = new Jogada() { };
 

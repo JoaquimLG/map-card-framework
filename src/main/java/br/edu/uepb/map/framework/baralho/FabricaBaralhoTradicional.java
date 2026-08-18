@@ -4,34 +4,35 @@ import br.edu.uepb.map.framework.cartas.CartaTradicional;
 import br.edu.uepb.map.framework.cartas.Naipe;
 import br.edu.uepb.map.framework.cartas.Valor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Fabrica a composicao tradicional de 52 cartas, sem coringas ou regras de jogo.
+ * Fábrica da composição tradicional de 52 cartas,
+ * sem coringas ou regras de jogo.
  */
-public final class FabricaBaralhoTradicional implements FabricaBaralho<CartaTradicional> {
+public final class FabricaBaralhoTradicional
+        extends FabricaBaralho<CartaTradicional> {
 
     /**
-     * Cria uma fabrica sem estado para baralhos tradicionais.
+     * Cria uma fábrica sem estado para baralhos tradicionais.
      */
     public FabricaBaralhoTradicional() {
     }
 
     /**
-     * Cria um baralho independente com uma carta para cada combinacao dos
-     * quatro naipes e treze valores tradicionais.
+     * Adiciona ao baralho uma carta para cada combinação
+     * dos quatro naipes e treze valores tradicionais.
      *
-     * @return novo baralho tradicional com 52 cartas
+     * @param baralho baralho que receberá as 52 cartas tradicionais
      */
     @Override
-    public Baralho<CartaTradicional> criar() {
-        List<CartaTradicional> cartas = new ArrayList<>();
+    protected void adicionarCartas(
+            Baralho<CartaTradicional> baralho) {
+
         for (Naipe naipe : Naipe.values()) {
             for (Valor valor : Valor.values()) {
-                cartas.add(new CartaTradicional(naipe, valor));
+                baralho.adicionar(
+                        new CartaTradicional(naipe, valor)
+                );
             }
         }
-        return new Baralho<>(cartas);
     }
 }
