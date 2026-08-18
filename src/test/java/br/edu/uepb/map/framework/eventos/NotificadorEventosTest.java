@@ -48,4 +48,29 @@ public class NotificadorEventosTest {
         assertThrows(UnsupportedOperationException.class,
                 () -> notificador.getOuvintes().add(evento -> { }));
     }
+
+    @Test
+    void rejeitaOuvinteEEventoNulos() {
+        NotificadorEventos notificador = new NotificadorEventos();
+
+        assertThrows(NullPointerException.class, () -> notificador.adicionarOuvinte(null));
+        assertThrows(NullPointerException.class, () -> notificador.removerOuvinte(null));
+        assertThrows(NullPointerException.class, () -> notificador.notificar(null));
+    }
+
+    @Test
+    void alteracaoDeCadastroDuranteNotificacaoSoAfetaProximoEvento() {
+        NotificadorEventos notificador = new NotificadorEventos();
+        List<Evento> recebidos = new ArrayList<>();
+        OuvinteEvento novoOuvinte = recebidos::add;
+        notificador.adicionarOuvinte(evento -> notificador.adicionarOuvinte(novoOuvinte));
+
+        Evento primeiro = new Evento(TipoEvento.PARTIDA_INICIADA, "primeiro");
+        notificador.notificar(primeiro);
+        assertTrue(recebidos.isEmpty());
+
+        Evento segundo = new Evento(TipoEvento.PARTIDA_FINALIZADA, "segundo");
+        notificador.notificar(segundo);
+        assertEquals(List.of(segundo), recebidos);
+    }
 }

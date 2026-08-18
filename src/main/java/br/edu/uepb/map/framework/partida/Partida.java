@@ -3,6 +3,7 @@ package br.edu.uepb.map.framework.partida;
 import br.edu.uepb.map.framework.baralho.Baralho;
 import br.edu.uepb.map.framework.cartas.Carta;
 import br.edu.uepb.map.framework.excecoes.JogadaInvalidaException;
+import br.edu.uepb.map.framework.excecoes.CartasInsuficientesException;
 import br.edu.uepb.map.framework.jogador.Jogada;
 import br.edu.uepb.map.framework.jogador.Jogador;
 import br.edu.uepb.map.framework.regras.RegraJogo;
@@ -40,8 +41,20 @@ public class Partida<T extends Carta> {
     }
 
     public void iniciar(int cartasIniciaisPorJogador) {
+        if (iniciada) {
+            throw new IllegalStateException("partida ja foi iniciada");
+        }
+        if (encerrada) {
+            throw new IllegalStateException("partida ja encerrada");
+        }
         if (cartasIniciaisPorJogador < 0) {
             throw new IllegalArgumentException("cartasIniciaisPorJogador nao pode ser negativo");
+        }
+        long quantidadeNecessaria = (long) cartasIniciaisPorJogador * jogadores.size();
+        if (quantidadeNecessaria > baralho.tamanho()) {
+            throw new CartasInsuficientesException(
+                    quantidadeNecessaria > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) quantidadeNecessaria,
+                    baralho.tamanho());
         }
         for (Jogador jogador : jogadores) {
             for (int i = 0; i < cartasIniciaisPorJogador; i++) {
@@ -54,6 +67,9 @@ public class Partida<T extends Carta> {
 
     public T comprarCartaPara(Jogador jogador) {
         Objects.requireNonNull(jogador, "jogador nao pode ser nulo");
+        if (!jogadores.contains(jogador)) {
+            throw new IllegalArgumentException("jogador nao participa desta partida");
+        }
         T carta = baralho.comprarCarta();
         jogador.receberCarta(carta);
         return carta;
@@ -78,7 +94,8 @@ public class Partida<T extends Carta> {
             return;
         }
 
-        Jogada jogada = jogadorAtual.decidirJogada();
+        Jogada jogada = Objects.requireNonNull(jogadorAtual.decidirJogada(),
+                "jogador nao pode decidir uma jogada nula");
 
         if (!regra.jogadaValida(jogada, jogadorAtual)) {
             throw new JogadaInvalidaException(jogadorAtual, jogada);
@@ -108,8 +125,15 @@ public class Partida<T extends Carta> {
     }
 
     public void encerrarPartida() {
+        if (!iniciada) {
+            throw new IllegalStateException("partida ainda nao foi iniciada");
+        }
+        if (encerrada) {
+            throw new IllegalStateException("partida ja encerrada");
+        }
+        Jogador vencedorApurado = regra.verificarVencedor(List.copyOf(jogadores));
+        this.vencedor = vencedorApurado;
         this.encerrada = true;
-        this.vencedor = regra.verificarVencedor(List.copyOf(jogadores));
     }
 
     public boolean isIniciada() {

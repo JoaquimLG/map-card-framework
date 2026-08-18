@@ -135,7 +135,8 @@ class PartidaTest {
                 new CartaTradicional(Naipe.ESPADAS, Valor.DEZ),
                 new CartaTradicional(Naipe.PAUS, Valor.CINCO) // 25: estourou
         ));
-        Jogador jogadorEstourado = new JogadorHumano("Jogador", mao, new Scanner(System.in), acao -> new JogadaBlackjack("COMPRAR"));
+        Jogador jogadorEstourado = new JogadorHumano(
+                "Jogador", mao, new Scanner("comprar\n"), acao -> new JogadaBlackjack("COMPRAR"));
         Jogador banca = new JogadorAutomatico("Banca", new MaoDeCartas<>(), new EstrategiaBlackjack());
 
         Partida<CartaTradicional> partida = new Partida<>(List.of(jogadorEstourado, banca), new Baralho<>(), new RegraBlackjack(), new ExecutorTeste());
@@ -158,5 +159,34 @@ class PartidaTest {
         Partida<CartaTradicional> partida = new Partida<>(List.of(jogador), new Baralho<>(), new RegraBlackjack(), new ExecutorTeste());
 
         assertThrows(BaralhoVazioException.class, () -> partida.comprarCartaPara(jogador));
+    }
+
+    @Test
+    void iniciarComCartasInsuficientesNaoDistribuiParcialmente() {
+        Jogador primeiro = jogadorHumano("Primeiro", new MaoDeCartas<>());
+        Jogador segundo = jogadorHumano("Segundo", new MaoDeCartas<>());
+        Baralho<CartaTradicional> baralho = new Baralho<>(List.of(
+                new CartaTradicional(Naipe.COPAS, Valor.AS)));
+        Partida<CartaTradicional> partida = new Partida<>(
+                List.of(primeiro, segundo), baralho, new RegraBlackjack(), new ExecutorTeste());
+
+        assertThrows(br.edu.uepb.map.framework.excecoes.CartasInsuficientesException.class,
+                () -> partida.iniciar(1));
+        assertEquals(0, primeiro.getMaoDeCartas().tamanho());
+        assertEquals(0, segundo.getMaoDeCartas().tamanho());
+        assertEquals(1, baralho.tamanho());
+        assertFalse(partida.isIniciada());
+    }
+
+    @Test
+    void rejeitaReinicioECompraParaQuemNaoParticipa() {
+        Jogador participante = jogadorHumano("Participante", new MaoDeCartas<>());
+        Jogador externo = jogadorHumano("Externo", new MaoDeCartas<>());
+        Partida<CartaTradicional> partida = new Partida<>(
+                List.of(participante), new Baralho<>(), new RegraBlackjack(), new ExecutorTeste());
+        partida.iniciar(0);
+
+        assertThrows(IllegalStateException.class, () -> partida.iniciar(0));
+        assertThrows(IllegalArgumentException.class, () -> partida.comprarCartaPara(externo));
     }
 }

@@ -9,6 +9,8 @@ import br.edu.uepb.map.framework.jogador.Jogador;
 import br.edu.uepb.map.framework.partida.ExecutorDeJogada;
 import br.edu.uepb.map.framework.partida.Partida;
 
+import java.util.Objects;
+
 /**
  * Aplica o efeito de uma {@link JogadaBlackjack} já validada por
  * {@link RegraBlackjack}: COMPRAR compra uma carta do baralho da partida (e
@@ -23,17 +25,21 @@ public class ExecutorDeJogadaBlackjack<T extends Carta> implements ExecutorDeJog
     private final NotificadorEventos notificador;
 
     public ExecutorDeJogadaBlackjack(NotificadorEventos notificador) {
-        this.notificador = notificador;
+        this.notificador = Objects.requireNonNull(notificador, "notificador nao pode ser nulo");
     }
 
     @Override
     public void aplicar(Jogada jogada, Jogador jogador, Partida<T> partida) {
-        JogadaBlackjack jogadaBlackjack = (JogadaBlackjack) jogada;
+        Objects.requireNonNull(jogador, "jogador nao pode ser nulo");
+        Objects.requireNonNull(partida, "partida nao pode ser nula");
+        if (!(jogada instanceof JogadaBlackjack jogadaBlackjack)) {
+            throw new IllegalArgumentException("jogada deve ser uma JogadaBlackjack");
+        }
 
         switch (jogadaBlackjack.getAcao()) {
             case "COMPRAR" -> aplicarCompra(jogador, partida);
             case "PARAR" -> aplicarParada(jogador);
-            default -> throw new IllegalStateException(
+            default -> throw new IllegalArgumentException(
                     "acao de blackjack desconhecida: " + jogadaBlackjack.getAcao());
         }
     }

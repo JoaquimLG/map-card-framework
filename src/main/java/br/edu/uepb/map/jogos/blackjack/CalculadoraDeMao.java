@@ -5,6 +5,8 @@ import br.edu.uepb.map.framework.cartas.CartaTradicional;
 import br.edu.uepb.map.framework.cartas.Valor;
 import br.edu.uepb.map.framework.jogador.Jogador;
 
+import java.util.Objects;
+
 /**
  * Calcula a pontuacao da mao de um jogador no Blackjack (As vale 1 ou 11,
  * J/Q/K valem 10).
@@ -21,16 +23,16 @@ import br.edu.uepb.map.framework.jogador.Jogador;
 public class CalculadoraDeMao {
 
     public int calcularPontuacao(Jogador jogador) {
+        Objects.requireNonNull(jogador, "jogador nao pode ser nulo");
         int pontuacao = 0;
         int quantidadeDeAses = 0;
 
         for (Carta carta : jogador.getMaoDeCartas().listarCartas()) {
 
-            if (!(carta instanceof CartaTradicional)) {
-                continue;
+            if (!(carta instanceof CartaTradicional cartaTradicional)) {
+                throw new IllegalArgumentException(
+                        "Blackjack aceita apenas cartas tradicionais: " + carta.getClass().getName());
             }
-
-            CartaTradicional cartaTradicional = (CartaTradicional) carta;
             Valor valor = cartaTradicional.getValor();
 
             switch (valor) {

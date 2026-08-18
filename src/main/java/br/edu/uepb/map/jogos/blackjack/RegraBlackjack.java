@@ -1,6 +1,7 @@
 package br.edu.uepb.map.jogos.blackjack;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.edu.uepb.map.framework.jogador.Jogada;
 import br.edu.uepb.map.framework.jogador.Jogador;
@@ -12,6 +13,7 @@ public class RegraBlackjack implements RegraJogo {
 
     @Override
     public boolean jogadaValida(Jogada jogada, Jogador jogador) {
+        Objects.requireNonNull(jogador, "jogador nao pode ser nulo");
         // Jogador que ja parou ou ja estourou (ver Jogador.desativar())
         // nao pode mais jogar.
         if (!jogador.isAtivo()) {
@@ -43,8 +45,12 @@ public class RegraBlackjack implements RegraJogo {
 
     @Override
     public Jogador verificarVencedor(List<Jogador> jogadores) {
-        if (jogadores == null || jogadores.isEmpty()) {
+        Objects.requireNonNull(jogadores, "jogadores nao pode ser nulo");
+        if (jogadores.isEmpty()) {
             return null;
+        }
+        if (jogadores.stream().anyMatch(Objects::isNull)) {
+            throw new NullPointerException("jogadores nao pode conter elementos nulos");
         }
 
         Jogador vencedor = null;

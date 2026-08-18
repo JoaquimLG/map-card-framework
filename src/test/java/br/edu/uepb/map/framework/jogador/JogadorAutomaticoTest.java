@@ -62,4 +62,14 @@ class JogadorAutomaticoTest {
         banca.desativar();
         assertFalse(banca.isAtivo());
     }
+
+    @Test
+    void rejeitaEstrategiaNulaEJogadaNulaProduzidaPelaEstrategia() {
+        assertThrows(NullPointerException.class,
+                () -> new JogadorAutomatico("Banca", new MaoDeCartas<>(), null));
+
+        JogadorAutomatico banca = new JogadorAutomatico(
+                "Banca", new MaoDeCartas<>(), new EstrategiaFake(null));
+        assertThrows(NullPointerException.class, banca::decidirJogada);
+    }
 }

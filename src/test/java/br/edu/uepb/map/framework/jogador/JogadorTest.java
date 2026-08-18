@@ -73,4 +73,14 @@ class JogadorTest {
         assertEquals(List.of(carta), jogador.getMaoDeCartas().listarCartas());
         assertEquals(1, jogador.getMaoDeCartas().tamanho());
     }
+
+    @Test
+    void rejeitaNomeNuloVazioEMaoNula() {
+        assertThrows(NullPointerException.class,
+                () -> new JogadorFake(null, new MaoDeCartas<>()));
+        assertThrows(IllegalArgumentException.class,
+                () -> new JogadorFake("   ", new MaoDeCartas<>()));
+        assertThrows(NullPointerException.class,
+                () -> new JogadorFake("Jogador", null));
+    }
 }

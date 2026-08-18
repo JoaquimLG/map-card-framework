@@ -27,8 +27,14 @@ public class EventoTest {
 
     @Test
     void deveRejeitarTipoNulo() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(NullPointerException.class,
                 () -> new Evento(null, "mensagem qualquer"));
+    }
+
+    @Test
+    void deveRejeitarMensagemNula() {
+        assertThrows(NullPointerException.class,
+                () -> new Evento(TipoEvento.PARTIDA_INICIADA, null));
     }
 
     @Test

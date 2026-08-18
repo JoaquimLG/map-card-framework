@@ -2,6 +2,7 @@ package br.edu.uepb.map.framework.jogador;
 
 import br.edu.uepb.map.framework.cartas.Carta;
 import java.util.Scanner;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class JogadorHumano extends Jogador {
@@ -12,8 +13,9 @@ public class JogadorHumano extends Jogador {
 
     public JogadorHumano(String nome, MaoDeCartas<Carta> maoDeCartas, Scanner scanner, Function<String, Jogada> mapeadorDeJogada) {
         super(nome, maoDeCartas);
-        this.scanner = scanner;
-        this.mapeadorDeJogada = mapeadorDeJogada;
+        this.scanner = Objects.requireNonNull(scanner, "scanner nao pode ser nulo");
+        this.mapeadorDeJogada = Objects.requireNonNull(
+                mapeadorDeJogada, "mapeadorDeJogada nao pode ser nulo");
     }
 
     @Override
@@ -22,6 +24,7 @@ public class JogadorHumano extends Jogador {
         String entrada = scanner.nextLine();
 
         // Converte a string digitada na jogada correspondente do jogo específico
-        return mapeadorDeJogada.apply(entrada);
+        return Objects.requireNonNull(mapeadorDeJogada.apply(entrada),
+                "mapeadorDeJogada nao pode produzir uma jogada nula");
     }
 }

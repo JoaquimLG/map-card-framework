@@ -77,4 +77,16 @@ class JogadorHumanoTest {
         jogador.desativar();
         assertFalse(jogador.isAtivo());
     }
+
+    @Test
+    void rejeitaDependenciasNulasEJogadaNulaDoMapeador() {
+        assertThrows(NullPointerException.class,
+                () -> new JogadorHumano("Jogador", new MaoDeCartas<>(), null, JogadaFake::new));
+        assertThrows(NullPointerException.class,
+                () -> new JogadorHumano("Jogador", new MaoDeCartas<>(), scannerCom(""), null));
+
+        JogadorHumano jogador = new JogadorHumano(
+                "Jogador", new MaoDeCartas<>(), scannerCom("COMPRAR\n"), entrada -> null);
+        assertThrows(NullPointerException.class, jogador::decidirJogada);
+    }
 }

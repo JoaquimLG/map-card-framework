@@ -4,6 +4,7 @@ import br.edu.uepb.map.framework.jogador.Jogador;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Evento {
     private static final DateTimeFormatter FORMATO_HORA = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -14,11 +15,8 @@ public class Evento {
     private final LocalDateTime momento;
 
     public Evento(TipoEvento tipo, String mensagem, Jogador jogador) {
-        if (tipo == null) {
-            throw new IllegalArgumentException("tipo do evento nao pode ser nulo");
-        }
-        this.tipo = tipo;
-        this.mensagem = mensagem;
+        this.tipo = Objects.requireNonNull(tipo, "tipo do evento nao pode ser nulo");
+        this.mensagem = Objects.requireNonNull(mensagem, "mensagem do evento nao pode ser nula");
         this.jogador = jogador;
         this.momento = LocalDateTime.now();
     }

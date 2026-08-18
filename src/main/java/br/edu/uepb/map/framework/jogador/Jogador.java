@@ -2,6 +2,8 @@ package br.edu.uepb.map.framework.jogador;
 
 import br.edu.uepb.map.framework.cartas.Carta;
 
+import java.util.Objects;
+
 public abstract class Jogador {
 
     private final String nome;
@@ -9,8 +11,11 @@ public abstract class Jogador {
     private boolean ativo;
 
     protected Jogador(String nome, MaoDeCartas<Carta> maoDeCartas) {
-        this.nome = nome;
-        this.maoDeCartas = maoDeCartas;
+        this.nome = Objects.requireNonNull(nome, "nome nao pode ser nulo");
+        if (nome.isBlank()) {
+            throw new IllegalArgumentException("nome nao pode ser vazio");
+        }
+        this.maoDeCartas = Objects.requireNonNull(maoDeCartas, "maoDeCartas nao pode ser nula");
         this.ativo = true;
     }
 
