@@ -1,0 +1,9 @@
+br.edu.uepb.map.framework.baralho
+br.edu.uepb.map.framework.cartas
+br.edu.uepb.map.framework.estrategia
+br.edu.uepb.map.framework.eventos
+br.edu.uepb.map.framework.excecoes
+br.edu.uepb.map.framework.jogador
+br.edu.uepb.map.framework.partida
+br.edu.uepb.map.framework.regras
+br.edu.uepb.map.jogos.blackjack
