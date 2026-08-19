@@ -1,90 +1,115 @@
 <mxfile host="app.diagrams.net" agent="Codex" compressed="false" pages="2">
   <diagram id="framework" name="1 - Framework reutilizável">
-    <mxGraphModel dx="2135" dy="1295" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" math="0" shadow="0">
+    <mxGraphModel dx="2135" dy="1295" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1450" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;" value="Framework reutilizável para jogos de cartas" vertex="1">
-          <mxGeometry height="40" width="780" x="510" y="20" as="geometry" />
+          <mxGeometry height="40" width="900" x="650" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=8;" value="&lt;b&gt;Legenda&lt;/b&gt;&lt;br&gt;Azul: componente reutilizável&lt;br&gt;Verde: ponto de extensão&lt;br&gt;Tracejada + triângulo: implementação&lt;br&gt;Tracejada + seta: dependência&lt;br&gt;Losango preenchido: composição&lt;br&gt;Losango vazio: agregação" vertex="1">
-          <mxGeometry height="145" width="280" x="20" y="20" as="geometry" />
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=8;" value="&lt;b&gt;Legenda&lt;/b&gt;&lt;br&gt;Azul: componente reutilizável | Verde: ponto de extensão&lt;br&gt;Tracejada + triângulo: implementação | Tracejada + seta: dependência&lt;br&gt;Losango preenchido: composição | Losango vazio: agregação&lt;br&gt;Multiplicidades aparecem junto às pontas: 1, 0..1, 0..* e 1..*" vertex="1">
+          <mxGeometry height="130" width="540" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="areaCartas" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f9ff;strokeColor=#9eb6ce;dashed=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontStyle=1;fontColor=#385d7a;" value="CARTAS E BARALHOS" vertex="1">
+          <mxGeometry height="460" width="650" x="40" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="areaPartida" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f9ff;strokeColor=#9eb6ce;dashed=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontStyle=1;fontColor=#385d7a;" value="PARTIDA E REGRAS" vertex="1">
+          <mxGeometry height="460" width="1430" x="730" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="areaJogadores" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f9ff;strokeColor=#9eb6ce;dashed=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontStyle=1;fontColor=#385d7a;" value="JOGADORES E JOGADAS" vertex="1">
+          <mxGeometry height="700" width="990" x="40" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="areaEventos" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f9ff;strokeColor=#9eb6ce;dashed=1;verticalAlign=top;align=left;spacingTop=10;spacingLeft=14;fontStyle=1;fontColor=#385d7a;" value="EVENTOS E OBSERVADORES" vertex="1">
+          <mxGeometry height="700" width="1090" x="1070" y="700" as="geometry" />
         </mxCell>
         <mxCell id="carta" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;Carta&lt;/b&gt;&lt;hr&gt;+ getDescricao(): String" vertex="1">
-          <mxGeometry height="105" width="220" x="60" y="190" as="geometry" />
+          <mxGeometry height="105" width="220" x="80" y="270" as="geometry" />
         </mxCell>
         <mxCell id="baralho" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Baralho&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;- cartas: List&amp;lt;T&amp;gt;&lt;hr&gt;+ comprarCarta(): T&lt;br&gt;+ comprarCartas(qtd): List&amp;lt;T&amp;gt;&lt;br&gt;+ embaralhar(): void&lt;br&gt;+ getCartas(): List&amp;lt;T&amp;gt;" vertex="1">
-          <mxGeometry height="180" width="280" x="360" y="150" as="geometry" />
+          <mxGeometry height="180" width="280" x="360" y="250" as="geometry" />
         </mxCell>
         <mxCell id="fabrica" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;abstract&amp;raquo;&lt;br&gt;FabricaBaralho&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;+ criar(): Baralho&amp;lt;T&amp;gt; {final}&lt;br&gt;# adicionarCartas(Baralho&amp;lt;T&amp;gt;): void {abstract}" vertex="1">
-          <mxGeometry height="140" width="320" x="700" y="170" as="geometry" />
+          <mxGeometry height="140" width="320" x="200" y="470" as="geometry" />
         </mxCell>
         <mxCell id="mao" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;MaoDeCartas&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;- cartas: List&amp;lt;T&amp;gt;&lt;hr&gt;+ receberCarta(T): void&lt;br&gt;+ jogarCarta(T): boolean&lt;br&gt;+ listarCartas(): List&amp;lt;T&amp;gt;" vertex="1">
-          <mxGeometry height="165" width="280" x="1080" y="150" as="geometry" />
+          <mxGeometry height="165" width="280" x="700" y="780" as="geometry" />
         </mxCell>
         <mxCell id="jogador" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;&amp;laquo;abstract&amp;raquo;&lt;br&gt;Jogador&lt;/b&gt;&lt;hr&gt;- nome: String&lt;br&gt;- maoDeCartas: MaoDeCartas&amp;lt;Carta&amp;gt;&lt;br&gt;- ativo: boolean&lt;hr&gt;+ receberCarta(Carta): void&lt;br&gt;+ desativar(): void&lt;br&gt;+ decidirJogada(): Jogada {abstract}" vertex="1">
-          <mxGeometry height="190" width="300" x="60" y="450" as="geometry" />
+          <mxGeometry height="190" width="300" x="80" y="780" as="geometry" />
         </mxCell>
         <mxCell id="humano" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;JogadorHumano&lt;/b&gt;&lt;hr&gt;- scanner: Scanner&lt;br&gt;- mapeadorDeJogada: Function&amp;lt;String, Jogada&amp;gt;&lt;hr&gt;+ decidirJogada(): Jogada" vertex="1">
-          <mxGeometry height="135" width="250" x="20" y="760" as="geometry" />
+          <mxGeometry height="135" width="250" x="70" y="1070" as="geometry" />
         </mxCell>
         <mxCell id="automatico" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;JogadorAutomatico&lt;/b&gt;&lt;hr&gt;- estrategia: Estrategia&lt;hr&gt;+ decidirJogada(): Jogada" vertex="1">
-          <mxGeometry height="120" width="240" x="310" y="760" as="geometry" />
+          <mxGeometry height="120" width="240" x="370" y="1070" as="geometry" />
         </mxCell>
         <mxCell id="estrategia" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;Estrategia&lt;/b&gt;&lt;hr&gt;+ escolherJogada(Jogador): Jogada" vertex="1">
-          <mxGeometry height="110" width="260" x="610" y="760" as="geometry" />
+          <mxGeometry height="110" width="260" x="690" y="1075" as="geometry" />
         </mxCell>
         <mxCell id="jogada" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;Jogada&lt;/b&gt;" vertex="1">
-          <mxGeometry height="75" width="190" x="930" y="760" as="geometry" />
+          <mxGeometry height="75" width="190" x="725" y="1270" as="geometry" />
         </mxCell>
         <mxCell id="partida" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;&amp;laquo;abstract&amp;raquo;&lt;br&gt;Partida&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;- jogadores: List&amp;lt;Jogador&amp;gt;&lt;br&gt;- baralho: Baralho&amp;lt;T&amp;gt;&lt;br&gt;- regra: RegraJogo&lt;br&gt;- executorDeJogada: ExecutorDeJogada&amp;lt;T&amp;gt;&lt;hr&gt;+ iniciar(qtd): void {final}&lt;br&gt;+ jogarTurno(): void {final}&lt;br&gt;# distribuirCartasIniciais(qtd): void&lt;br&gt;# deveEncerrar(): boolean {abstract}&lt;br&gt;+ encerrarPartida(): void" vertex="1">
-          <mxGeometry height="270" width="380" x="520" y="405" as="geometry" />
+          <mxGeometry height="270" width="380" x="770" y="270" as="geometry" />
         </mxCell>
         <mxCell id="regra" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;RegraJogo&lt;/b&gt;&lt;hr&gt;+ jogadaValida(Jogada, Jogador): boolean&lt;br&gt;+ verificarVencedor(List&amp;lt;Jogador&amp;gt;): Jogador" vertex="1">
-          <mxGeometry height="130" width="320" x="980" y="430" as="geometry" />
+          <mxGeometry height="130" width="320" x="1230" y="290" as="geometry" />
         </mxCell>
         <mxCell id="executor" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;ExecutorDeJogada&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;+ aplicar(Jogada, Jogador, Partida&amp;lt;T&amp;gt;): void" vertex="1">
-          <mxGeometry height="125" width="330" x="1390" y="430" as="geometry" />
+          <mxGeometry height="125" width="330" x="1710" y="290" as="geometry" />
         </mxCell>
         <mxCell id="notificador" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;NotificadorEventos&lt;/b&gt;&lt;hr&gt;- ouvintes: List&amp;lt;OuvinteEvento&amp;gt;&lt;hr&gt;+ adicionarOuvinte(OuvinteEvento): void&lt;br&gt;+ removerOuvinte(OuvinteEvento): void&lt;br&gt;+ notificar(Evento): void" vertex="1">
-          <mxGeometry height="165" width="300" x="1210" y="730" as="geometry" />
+          <mxGeometry height="165" width="300" x="1120" y="780" as="geometry" />
         </mxCell>
         <mxCell id="ouvinte" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;OuvinteEvento&lt;/b&gt;&lt;hr&gt;+ aoReceberEvento(Evento): void" vertex="1">
-          <mxGeometry height="105" width="250" x="1260" y="990" as="geometry" />
+          <mxGeometry height="105" width="250" x="1145" y="1060" as="geometry" />
         </mxCell>
-        <mxCell id="evento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Evento&lt;/b&gt;&lt;hr&gt;- tipo: TipoEvento&lt;br&gt;- mensagem: String&lt;br&gt;- jogador: Jogador [0..1]&lt;br&gt;- momento: LocalDateTime" vertex="1">
-          <mxGeometry height="145" width="230" x="1540" y="740" as="geometry" />
+        <mxCell id="evento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Evento&lt;/b&gt;&lt;hr&gt;- tipo: TipoEvento&lt;br&gt;- mensagem: String&lt;br&gt;- jogador: Jogador&lt;br&gt;- momento: LocalDateTime" vertex="1">
+          <mxGeometry height="145" width="230" x="1510" y="790" as="geometry" />
         </mxCell>
         <mxCell id="tipoEvento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;TipoEvento&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="180" x="1570" y="990" as="geometry" />
+          <mxGeometry height="70" width="180" x="1860" y="810" as="geometry" />
         </mxCell>
         <mxCell id="eventoPadrao" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;EventoPadrao&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="180" x="1570" y="1090" as="geometry" />
+          <mxGeometry height="70" width="180" x="1860" y="1040" as="geometry" />
         </mxCell>
         <mxCell id="consoleOuvinte" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ConsoleOuvinte&lt;/b&gt;&lt;hr&gt;+ aoReceberEvento(Evento): void" vertex="1">
-          <mxGeometry height="90" width="250" x="930" y="1000" as="geometry" />
+          <mxGeometry height="90" width="250" x="1145" y="1240" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="1" source="baralho" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;startArrow=none;" target="carta" value="contém">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="e1-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e1">
+          <mxGeometry x="-0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e1-target-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e1">
+          <mxGeometry x="0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
         <mxCell id="e2" edge="1" parent="1" source="fabrica" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" target="baralho" value="cria">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="mao" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="carta" value="contém">
+        <mxCell id="e3" edge="1" parent="1" source="mao" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="carta" value="contém">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1220" y="140" />
-              <mxPoint x="170" y="140" />
+              <mxPoint x="840" y="650" />
+              <mxPoint x="190" y="650" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="jogador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="mao" value="possui">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="210" y="370" />
-              <mxPoint x="1220" y="370" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e3-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e3">
+          <mxGeometry x="-0.85" relative="1" as="geometry"><mxPoint x="12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e3-target-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e3">
+          <mxGeometry x="0.85" relative="1" as="geometry"><mxPoint x="-16" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="jogador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="mao" value="possui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e4">
+          <mxGeometry x="-0.72" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e4-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e4">
+          <mxGeometry x="0.72" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
         </mxCell>
         <mxCell id="e5" edge="1" parent="1" source="humano" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=0;" target="jogador">
           <mxGeometry relative="1" as="geometry" />
@@ -95,45 +120,86 @@
         <mxCell id="e7" edge="1" parent="1" source="automatico" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;" target="estrategia" value="usa">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="e7-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e7">
+          <mxGeometry x="-0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e7-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e7">
+          <mxGeometry x="0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
         <mxCell id="e8" edge="1" parent="1" source="estrategia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" target="jogada" value="produz">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e9" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=0;endArrow=open;endFill=0;" target="jogador" value="participantes">
+        <mxCell id="e9" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=0;endArrow=open;endFill=0;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.35;entryDx=0;entryDy=0;" target="jogador" value="participantes">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="846" y="666" /><mxPoint x="420" y="666" /><mxPoint x="420" y="847" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e9-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e9">
+          <mxGeometry x="-0.88" relative="1" as="geometry"><mxPoint x="10" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e9-target-multiplicity" value="1..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e9">
+          <mxGeometry x="0.88" relative="1" as="geometry"><mxPoint x="-16" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0;exitY=0.45;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="baralho" value="baralho">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e10" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;jumpStyle=arc;jumpSize=12;" target="baralho" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e10-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e10">
+          <mxGeometry x="-0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e10-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e10">
+          <mxGeometry x="0.78" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
         </mxCell>
         <mxCell id="e11" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;" target="regra" value="delega validação">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e12" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="executor" value="delega execução">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="795" y="690" />
-              <mxPoint x="1555" y="690" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="e11-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e11">
+          <mxGeometry x="-0.82" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e11-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e11">
+          <mxGeometry x="0.82" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="partida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=1;exitY=0.78;exitDx=0;exitDy=0;entryX=0;entryY=0.78;entryDx=0;entryDy=0;" target="executor" value="delega execução">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1185" y="501" /><mxPoint x="1665" y="501" /><mxPoint x="1665" y="388" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e12-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e12">
+          <mxGeometry x="-0.88" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e12-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e12">
+          <mxGeometry x="0.88" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
         </mxCell>
         <mxCell id="e13" edge="1" parent="1" source="notificador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=0;endArrow=open;endFill=0;" target="ouvinte" value="observadores">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="e13-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e13">
+          <mxGeometry x="-0.78" relative="1" as="geometry"><mxPoint x="14" y="-8" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e13-target-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e13">
+          <mxGeometry x="0.78" relative="1" as="geometry"><mxPoint x="-18" y="-8" as="offset" /></mxGeometry>
+        </mxCell>
         <mxCell id="e14" edge="1" parent="1" source="notificador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" target="evento" value="publica">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e15" edge="1" parent="1" source="evento" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="jogador" value="referencia">
+        <mxCell id="e15" edge="1" parent="1" source="evento" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="jogador" value="referencia">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1655" y="940" />
-              <mxPoint x="1540" y="940" />
-              <mxPoint x="1540" y="1160" />
-              <mxPoint x="10" y="1160" />
-              <mxPoint x="10" y="545" />
+              <mxPoint x="1556" y="682" />
+              <mxPoint x="450" y="682" />
+              <mxPoint x="450" y="913" />
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="e15-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e15">
+          <mxGeometry x="-0.9" relative="1" as="geometry"><mxPoint x="10" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e15-target-multiplicity" value="0..1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e15">
+          <mxGeometry x="0.9" relative="1" as="geometry"><mxPoint x="-18" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
         <mxCell id="e16" edge="1" parent="1" source="evento" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;" target="tipoEvento" value="tipo">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e16">
+          <mxGeometry x="-0.8" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e16-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="e16">
+          <mxGeometry x="0.8" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
         </mxCell>
         <mxCell id="e17" edge="1" parent="1" source="consoleOuvinte" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="ouvinte">
           <mxGeometry relative="1" as="geometry" />
@@ -145,69 +211,69 @@
     </mxGraphModel>
   </diagram>
   <diagram id="blackjack" name="2 - Aplicação Blackjack">
-    <mxGraphModel dx="1735" dy="1053" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" math="0" shadow="0">
+    <mxGraphModel dx="1735" dy="1053" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
       <root>
         <mxCell id="b0" />
         <mxCell id="b1" parent="b0" />
         <mxCell id="btitle" parent="b1" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;" value="Blackjack - aplicação cliente e implementações dos pontos de extensão" vertex="1">
-          <mxGeometry height="40" width="950" x="360" y="25" as="geometry" />
+          <mxGeometry height="40" width="1000" x="600" y="25" as="geometry" />
         </mxCell>
         <mxCell id="bfw" parent="b1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;verticalAlign=top;spacingTop=10;" value="&lt;b&gt;FRAMEWORK (API reutilizável)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="430" width="1620" x="40" y="100" as="geometry" />
+          <mxGeometry height="330" width="2120" x="40" y="100" as="geometry" />
         </mxCell>
         <mxCell id="bapp" parent="b1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=16;verticalAlign=top;spacingTop=10;" value="&lt;b&gt;APLICAÇÃO CLIENTE: BLACKJACK&lt;/b&gt;" vertex="1">
-          <mxGeometry height="650" width="1620" x="40" y="570" as="geometry" />
+          <mxGeometry height="870" width="2120" x="40" y="470" as="geometry" />
         </mxCell>
         <mxCell id="iEstrategia" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;Estrategia&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="210" x="360" y="190" as="geometry" />
+          <mxGeometry height="70" width="210" x="430" y="180" as="geometry" />
         </mxCell>
         <mxCell id="iJogada" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;Jogada&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="190" x="650" y="190" as="geometry" />
+          <mxGeometry height="70" width="190" x="730" y="180" as="geometry" />
         </mxCell>
         <mxCell id="iRegra" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;RegraJogo&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="220" x="910" y="190" as="geometry" />
+          <mxGeometry height="70" width="220" x="990" y="180" as="geometry" />
         </mxCell>
         <mxCell id="iExecutor" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;ExecutorDeJogada&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="270" x="1190" y="190" as="geometry" />
+          <mxGeometry height="70" width="270" x="1280" y="180" as="geometry" />
         </mxCell>
         <mxCell id="fabTrad" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;FabricaBaralhoTradicional&lt;/b&gt;&lt;br&gt;&amp;laquo;extends FabricaBaralho&amp;lt;CartaTradicional&amp;gt;&amp;raquo;&lt;hr&gt;# adicionarCartas(Baralho): void" vertex="1">
-          <mxGeometry height="105" width="270" x="60" y="370" as="geometry" />
+          <mxGeometry height="105" width="270" x="100" y="300" as="geometry" />
         </mxCell>
         <mxCell id="estBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;EstrategiaBlackjack&lt;/b&gt;&lt;hr&gt;- calculadora: CalculadoraDeMao&lt;hr&gt;+ escolherJogada(Jogador): Jogada" vertex="1">
-          <mxGeometry height="130" width="250" x="340" y="640" as="geometry" />
+          <mxGeometry height="130" width="250" x="410" y="510" as="geometry" />
         </mxCell>
         <mxCell id="jogadaBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;JogadaBlackjack&lt;/b&gt;&lt;hr&gt;- acao: String&lt;hr&gt;+ getAcao(): String" vertex="1">
-          <mxGeometry height="115" width="210" x="640" y="640" as="geometry" />
+          <mxGeometry height="115" width="210" x="720" y="520" as="geometry" />
         </mxCell>
         <mxCell id="regraBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;RegraBlackjack&lt;/b&gt;&lt;hr&gt;- calculadora: CalculadoraDeMao&lt;hr&gt;+ jogadaValida(...): boolean&lt;br&gt;+ verificarVencedor(...): Jogador" vertex="1">
-          <mxGeometry height="145" width="250" x="900" y="630" as="geometry" />
+          <mxGeometry height="145" width="250" x="980" y="510" as="geometry" />
         </mxCell>
         <mxCell id="execBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;ExecutorDeJogadaBlackjack&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;- calculadora: CalculadoraDeMao&lt;br&gt;- notificador: NotificadorEventos&lt;hr&gt;+ aplicar(...): void" vertex="1">
-          <mxGeometry height="145" width="270" x="1190" y="630" as="geometry" />
+          <mxGeometry height="145" width="270" x="1280" y="510" as="geometry" />
         </mxCell>
         <mxCell id="partidaBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;PartidaBlackjack&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;# deveEncerrar(): boolean" vertex="1">
-          <mxGeometry height="100" width="260" x="60" y="650" as="geometry" />
+          <mxGeometry height="100" width="260" x="100" y="520" as="geometry" />
         </mxCell>
         <mxCell id="calc" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;CalculadoraDeMao&lt;/b&gt;&lt;hr&gt;+ calcularPontuacao(Jogador): int" vertex="1">
-          <mxGeometry height="90" width="250" x="1190" y="870" as="geometry" />
+          <mxGeometry height="90" width="250" x="1190" y="800" as="geometry" />
         </mxCell>
         <mxCell id="pont" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;Pontuacao&lt;/b&gt;&lt;hr&gt;- vitoriasPorNome: Map&lt;hr&gt;+ registrarVitoria(Jogador): void&lt;br&gt;+ placar(): String" vertex="1">
-          <mxGeometry height="125" width="240" x="1190" y="1000" as="geometry" />
+          <mxGeometry height="125" width="240" x="1500" y="1030" as="geometry" />
         </mxCell>
         <mxCell id="jogo" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;JogoBlackjack&lt;/b&gt;&lt;hr&gt;- scanner: Scanner&lt;br&gt;- calculadora: CalculadoraDeMao&lt;br&gt;- pontuacao: Pontuacao&lt;hr&gt;+ main(String[]): void&lt;br&gt;+ jogar(): void" vertex="1">
-          <mxGeometry height="165" width="260" x="1480" y="870" as="geometry" />
+          <mxGeometry height="165" width="260" x="1800" y="800" as="geometry" />
         </mxCell>
         <mxCell id="bPartida" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;abstract&amp;raquo;&lt;br&gt;Partida&amp;lt;T extends Carta&amp;gt;&lt;/b&gt;&lt;hr&gt;+ iniciar(qtd): void {final}&lt;br&gt;+ jogarTurno(): void {final}&lt;br&gt;# deveEncerrar(): boolean {abstract}" vertex="1">
-          <mxGeometry height="145" width="270" x="60" y="170" as="geometry" />
+          <mxGeometry height="145" width="270" x="100" y="150" as="geometry" />
         </mxCell>
         <mxCell id="bNotificador" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;NotificadorEventos&lt;/b&gt;&lt;hr&gt;+ adicionarOuvinte(...): void&lt;br&gt;+ notificar(Evento): void" vertex="1">
-          <mxGeometry height="105" width="240" x="1490" y="190" as="geometry" />
+          <mxGeometry height="105" width="240" x="1630" y="160" as="geometry" />
         </mxCell>
         <mxCell id="iTipoEvento" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;TipoEvento&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="210" x="1490" y="390" as="geometry" />
+          <mxGeometry height="70" width="210" x="1930" y="180" as="geometry" />
         </mxCell>
         <mxCell id="eventoBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;EventoBlackjack&lt;/b&gt;&lt;hr&gt;JOGADOR_ESTOUROU" vertex="1">
-          <mxGeometry height="100" width="230" x="1490" y="640" as="geometry" />
+          <mxGeometry height="100" width="230" x="1920" y="520" as="geometry" />
         </mxCell>
         <mxCell id="be3" edge="1" parent="b1" source="estBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="iEstrategia">
           <mxGeometry relative="1" as="geometry" />
@@ -224,40 +290,82 @@
         <mxCell id="bePartida" edge="1" parent="b1" source="partidaBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=0;" target="bPartida">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="be9" edge="1" parent="b1" source="execBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="calc" value="usa">
+        <mxCell id="be9" edge="1" parent="b1" source="execBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" target="calc" value="usa">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="be10" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="calc" value="compõe">
+        <mxCell id="be9-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be9">
+          <mxGeometry x="-0.78" relative="1" as="geometry"><mxPoint x="14" y="-8" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="be9-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be9">
+          <mxGeometry x="0.78" relative="1" as="geometry"><mxPoint x="-14" y="-8" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bEstCalc" edge="1" parent="b1" source="estBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0;entryY=0.25;" target="calc" value="usa">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="535" y="720" /><mxPoint x="1150" y="720" /><mxPoint x="1150" y="822" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="bEstCalc-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bEstCalc">
+          <mxGeometry x="-0.9" relative="1" as="geometry"><mxPoint x="12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bEstCalc-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bEstCalc">
+          <mxGeometry x="0.9" relative="1" as="geometry"><mxPoint x="-12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bRegraCalc" edge="1" parent="b1" source="regraBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" target="calc" value="usa">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1105" y="760" /><mxPoint x="1252" y="760" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="bRegraCalc-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bRegraCalc">
+          <mxGeometry x="-0.82" relative="1" as="geometry"><mxPoint x="12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bRegraCalc-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bRegraCalc">
+          <mxGeometry x="0.82" relative="1" as="geometry"><mxPoint x="-12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="be10" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;exitX=0;exitY=0.45;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="calc" value="compõe">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="be11" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;" target="pont" value="compõe">
+        <mxCell id="be10-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be10">
+          <mxGeometry x="-0.85" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="be10-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be10">
+          <mxGeometry x="0.85" relative="1" as="geometry"><mxPoint y="-12" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="be11" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamondThin;startFill=1;endArrow=open;endFill=0;exitX=0.2;exitY=1;entryX=1;entryY=0.45;" target="pont" value="compõe">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="bExecNotificador" edge="1" parent="b1" source="execBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" target="bNotificador" value="notifica">
+        <mxCell id="be11-source-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be11">
+          <mxGeometry x="-0.82" relative="1" as="geometry"><mxPoint x="12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="be11-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="be11">
+          <mxGeometry x="0.82" relative="1" as="geometry"><mxPoint x="-12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bExecNotificador" edge="1" parent="b1" source="execBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=0;exitX=1;exitY=0.35;entryX=0.5;entryY=1;" target="bNotificador" value="notifica">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="1475" y="702" /><mxPoint x="1475" y="330" /><mxPoint x="1610" y="330" /></Array>
+            <Array as="points"><mxPoint x="1580" y="561" /><mxPoint x="1580" y="300" /><mxPoint x="1750" y="300" /></Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="bExecNotificador-source-multiplicity" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bExecNotificador">
+          <mxGeometry x="-0.85" relative="1" as="geometry"><mxPoint x="12" y="-10" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="bExecNotificador-target-multiplicity" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontStyle=1;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="bExecNotificador">
+          <mxGeometry x="0.85" relative="1" as="geometry"><mxPoint x="-12" y="-10" as="offset" /></mxGeometry>
         </mxCell>
         <mxCell id="bJogoPartida" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" target="partidaBj" value="cria e conduz">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="1610" y="1160" /><mxPoint x="30" y="1160" /><mxPoint x="30" y="700" /></Array>
+            <Array as="points"><mxPoint x="1930" y="1280" /><mxPoint x="70" y="1280" /><mxPoint x="70" y="570" /></Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="bJogoFabrica" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.35;entryX=1;entryY=0.5;" target="fabTrad" value="cria baralho">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="1770" y="928" /><mxPoint x="1770" y="520" /><mxPoint x="340" y="520" /><mxPoint x="340" y="422" /></Array>
+            <Array as="points"><mxPoint x="2180" y="858" /><mxPoint x="2180" y="450" /><mxPoint x="390" y="450" /><mxPoint x="390" y="352" /></Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="bJogoNotificador" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" target="bNotificador" value="configura">
+        <mxCell id="bJogoNotificador" edge="1" parent="b1" source="jogo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.15;entryX=1;entryY=0.5;" target="bNotificador" value="configura">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="1610" y="840" /><mxPoint x="1610" y="330" /></Array>
+            <Array as="points"><mxPoint x="2160" y="825" /><mxPoint x="2160" y="350" /><mxPoint x="1890" y="350" /><mxPoint x="1890" y="212" /></Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="beTipoEvento" edge="1" parent="b1" source="eventoBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="iTipoEvento">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="note" parent="b1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=8;" value="&lt;b&gt;Padrões evidenciados&lt;/b&gt;&lt;br&gt;Template Method: Partida&lt;br&gt;Factory: FabricaBaralho&lt;br&gt;Strategy: Estrategia&lt;br&gt;Observer: NotificadorEventos + OuvinteEvento" vertex="1">
-          <mxGeometry height="150" width="350" x="80" y="900" as="geometry" />
+          <mxGeometry height="150" width="350" x="100" y="820" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
