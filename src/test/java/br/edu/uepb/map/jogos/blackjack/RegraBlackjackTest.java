@@ -35,7 +35,7 @@ public class RegraBlackjackTest {
                 "Jogador 1",
                 mao,
                 scanner,
-                acao -> new JogadaBlackjack(acao)
+                acao -> new JogadaBlackjack(AcaoBlackjack.valueOf(acao))
         );
     }
 
@@ -44,7 +44,7 @@ public class RegraBlackjackTest {
         jogador.receberCarta(new CartaTradicional(Naipe.COPAS, Valor.DEZ));
         jogador.receberCarta(new CartaTradicional(Naipe.ESPADAS, Valor.CINCO));
 
-        Jogada pedirCarta = new JogadaBlackjack("COMPRAR");
+        Jogada pedirCarta = new JogadaBlackjack(AcaoBlackjack.COMPRAR);
 
         assertTrue(
                 regra.jogadaValida(pedirCarta, jogador),
@@ -58,7 +58,7 @@ public class RegraBlackjackTest {
         jogador.receberCarta(new CartaTradicional(Naipe.ESPADAS, Valor.DEZ));
         jogador.receberCarta(new CartaTradicional(Naipe.PAUS, Valor.CINCO));
 
-        Jogada pedirCarta = new JogadaBlackjack("COMPRAR");
+        Jogada pedirCarta = new JogadaBlackjack(AcaoBlackjack.COMPRAR);
 
         assertFalse(
                 regra.jogadaValida(pedirCarta, jogador),
@@ -72,7 +72,7 @@ public void naoDevePermitirComprarCom21() {
     jogador.receberCarta(new CartaTradicional(Naipe.ESPADAS, Valor.SEIS));
     jogador.receberCarta(new CartaTradicional(Naipe.PAUS, Valor.CINCO));
 
-    Jogada pedirCarta = new JogadaBlackjack("COMPRAR");
+    Jogada pedirCarta = new JogadaBlackjack(AcaoBlackjack.COMPRAR);
 
     assertFalse(
             regra.jogadaValida(pedirCarta, jogador),
@@ -100,14 +100,14 @@ public void naoDevePermitirComprarCom21() {
                 "Jogador",
                 maoJogador,
                 new Scanner(System.in),
-                acao -> new JogadaBlackjack(acao)
+                acao -> new JogadaBlackjack(AcaoBlackjack.valueOf(acao))
         );
 
         Jogador banca = new JogadorHumano(
                 "Banca",
                 maoBanca,
                 new Scanner(System.in),
-                acao -> new JogadaBlackjack(acao)
+                acao -> new JogadaBlackjack(AcaoBlackjack.valueOf(acao))
         );
 
         Jogador vencedor = regra.verificarVencedor(

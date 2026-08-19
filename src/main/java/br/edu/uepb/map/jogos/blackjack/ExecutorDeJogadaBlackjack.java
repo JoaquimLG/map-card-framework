@@ -45,10 +45,8 @@ public class ExecutorDeJogadaBlackjack<T extends Carta> implements ExecutorDeJog
         }
 
         switch (jogadaBlackjack.getAcao()) {
-            case "COMPRAR" -> aplicarCompra(jogador, partida);
-            case "PARAR" -> aplicarParada(jogador);
-            default -> throw new IllegalArgumentException(
-                    "acao de blackjack desconhecida: " + jogadaBlackjack.getAcao());
+            case COMPRAR -> aplicarCompra(jogador, partida);
+            case PARAR -> aplicarParada(jogador);
         }
     }
 

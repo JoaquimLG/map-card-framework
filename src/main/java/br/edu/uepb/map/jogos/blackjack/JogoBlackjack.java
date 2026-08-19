@@ -163,9 +163,9 @@ partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
     private Jogada mapearJogada(String entrada) {
         String normalizada = entrada == null ? "" : entrada.trim().toUpperCase(Locale.ROOT);
         return switch (normalizada) {
-            case "C", "COMPRAR", "1" -> new JogadaBlackjack("COMPRAR");
-            case "P", "PARAR", "2" -> new JogadaBlackjack("PARAR");
-            default -> new JogadaBlackjack(normalizada); // RegraBlackjack rejeita e pede de novo
+            case "C", "COMPRAR", "1" -> new JogadaBlackjack(AcaoBlackjack.COMPRAR);
+            case "P", "PARAR", "2" -> new JogadaBlackjack(AcaoBlackjack.PARAR);
+            default -> new Jogada() { }; // RegraBlackjack rejeita e pede de novo
         };
     }
 }

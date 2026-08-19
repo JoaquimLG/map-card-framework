@@ -34,10 +34,10 @@ public class EstrategiaBlackjack implements Estrategia {
 
         // A banca compra enquanto tiver menos de 17 pontos.
         if (pontuacaoAtual < 17) {
-            return new JogadaBlackjack("COMPRAR");
+            return new JogadaBlackjack(AcaoBlackjack.COMPRAR);
         }
 
         // Com 17 ou mais, a banca para.
-        return new JogadaBlackjack("PARAR");
+        return new JogadaBlackjack(AcaoBlackjack.PARAR);
     }
 }

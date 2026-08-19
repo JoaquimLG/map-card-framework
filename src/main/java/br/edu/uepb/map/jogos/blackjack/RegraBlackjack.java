@@ -26,7 +26,7 @@ public class RegraBlackjack implements RegraJogo {
     /**
      * Verifica se a jogada é permitida: o jogador precisa estar ativo,
      * a jogada precisa ser uma {@link JogadaBlackjack} com ação
-     * "COMPRAR" ou "PARAR", e não é permitido comprar mais cartas ao
+     * válida, e não é permitido comprar mais cartas ao
      * atingir ou ultrapassar 21 pontos.
      *
      * @param jogada  jogada que o jogador deseja realizar
@@ -49,22 +49,21 @@ public class RegraBlackjack implements RegraJogo {
         }
 
         JogadaBlackjack jogadaBlackjack = (JogadaBlackjack) jogada;
-        String acao = jogadaBlackjack.getAcao();
+        AcaoBlackjack acao = jogadaBlackjack.getAcao();
 
         int pontuacao = calculadora.calcularPontuacao(jogador);
 
         // Se o jogador já estourou 21, não pode mais comprar cartas.
-        if (pontuacao > 21 && acao.equals("COMPRAR")) {
+        if (pontuacao > 21 && acao == AcaoBlackjack.COMPRAR) {
             return false;
         }
 
         // Se chegou a 21, também não pode comprar mais cartas.
-        if (pontuacao == 21 && acao.equals("COMPRAR")) {
+        if (pontuacao == 21 && acao == AcaoBlackjack.COMPRAR) {
             return false;
         }
 
-        // As jogadas permitidas no Blackjack são COMPRAR e PARAR.
-        return acao.equals("COMPRAR") || acao.equals("PARAR");
+        return true;
     }
 
     /**

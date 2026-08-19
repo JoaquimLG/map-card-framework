@@ -45,7 +45,7 @@ public class EstrategiaBlackjackTest {
         assertTrue(jogada instanceof JogadaBlackjack);
 
         assertEquals(
-                "COMPRAR",
+                AcaoBlackjack.COMPRAR,
                 ((JogadaBlackjack) jogada).getAcao(),
                 "A banca deve comprar carta quando tiver menos de 17."
         );
@@ -71,7 +71,7 @@ public class EstrategiaBlackjackTest {
         assertTrue(jogada instanceof JogadaBlackjack);
 
         assertEquals(
-                "PARAR",
+                AcaoBlackjack.PARAR,
                 ((JogadaBlackjack) jogada).getAcao(),
                 "A banca deve parar quando atingir 17."
         );
@@ -95,7 +95,7 @@ public class EstrategiaBlackjackTest {
         Jogada jogada = estrategia.escolherJogada(banca);
 
         assertEquals(
-                "PARAR",
+                AcaoBlackjack.PARAR,
                 ((JogadaBlackjack) jogada).getAcao(),
                 "A banca deve parar quando tiver mais de 17."
         );
@@ -119,7 +119,7 @@ public class EstrategiaBlackjackTest {
         Jogada jogada = estrategia.escolherJogada(banca);
 
         assertEquals(
-                "PARAR",
+                AcaoBlackjack.PARAR,
                 ((JogadaBlackjack) jogada).getAcao(),
                 "Ás + 6 deve ser considerado como 17."
         );
@@ -144,7 +144,7 @@ public class EstrategiaBlackjackTest {
         Jogada jogada = estrategia.escolherJogada(banca);
 
         assertEquals(
-                "PARAR",
+                AcaoBlackjack.PARAR,
                 ((JogadaBlackjack) jogada).getAcao(),
                 "Ás deve valer 1 quando necessário para evitar estouro."
         );

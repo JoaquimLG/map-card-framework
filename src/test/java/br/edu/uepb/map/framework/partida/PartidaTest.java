@@ -25,6 +25,7 @@ import br.edu.uepb.map.framework.jogador.MaoDeCartas;
 import br.edu.uepb.map.jogos.blackjack.CalculadoraDeMao;
 import br.edu.uepb.map.jogos.blackjack.EstrategiaBlackjack;
 import br.edu.uepb.map.jogos.blackjack.JogadaBlackjack;
+import br.edu.uepb.map.jogos.blackjack.AcaoBlackjack;
 import br.edu.uepb.map.jogos.blackjack.RegraBlackjack;
 
 class PartidaTest {
@@ -97,7 +98,7 @@ class PartidaTest {
             JogadaBlackjack j =
                     (JogadaBlackjack) jogada;
 
-            if (j.getAcao().equals("COMPRAR")) {
+            if (j.getAcao() == AcaoBlackjack.COMPRAR) {
 
                 partida.comprarCartaPara(jogador);
 
@@ -122,7 +123,7 @@ class PartidaTest {
                 nome,
                 mao,
                 new Scanner(System.in),
-                JogadaBlackjack::new);
+                acao -> new JogadaBlackjack(AcaoBlackjack.valueOf(acao)));
     }
 
     @Test
@@ -351,7 +352,7 @@ class PartidaTest {
                                 "comprar\n"),
                         acao ->
                                 new JogadaBlackjack(
-                                        "COMPRAR"));
+                                        AcaoBlackjack.COMPRAR));
 
         Jogador banca =
                 new JogadorAutomatico(

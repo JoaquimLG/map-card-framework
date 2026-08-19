@@ -31,8 +31,9 @@ class TratamentoDeExcecoesBlackjackTest {
     }
 
     @Test
-    void jogadaNormalizaAcaoERejeitaNulo() {
-        assertEquals("COMPRAR", new JogadaBlackjack("  comprar ").getAcao());
+    void jogadaArmazenaAcaoERejeitaNulo() {
+        assertEquals(AcaoBlackjack.COMPRAR,
+                new JogadaBlackjack(AcaoBlackjack.COMPRAR).getAcao());
         assertThrows(NullPointerException.class, () -> new JogadaBlackjack(null));
     }
 
@@ -43,7 +44,7 @@ class TratamentoDeExcecoesBlackjackTest {
 
         Jogador jogador = new JogadorAutomatico(
                 "Jogador", new MaoDeCartas<>(List.of(new CartaIncompativel("outra"))),
-                ignorado -> new JogadaBlackjack("PARAR"));
+                ignorado -> new JogadaBlackjack(AcaoBlackjack.PARAR));
         assertThrows(IllegalArgumentException.class, () -> calculadora.calcularPontuacao(jogador));
     }
 
@@ -52,7 +53,8 @@ class TratamentoDeExcecoesBlackjackTest {
         assertThrows(NullPointerException.class, () -> new ExecutorDeJogadaBlackjack<Carta>(null));
 
         Jogador jogador = new JogadorAutomatico(
-                "Jogador", new MaoDeCartas<>(), ignorado -> new JogadaBlackjack("PARAR"));
+                "Jogador", new MaoDeCartas<>(),
+                ignorado -> new JogadaBlackjack(AcaoBlackjack.PARAR));
         Partida<Carta> partida = new PartidaBlackjack<>(List.of(jogador), new Baralho<>(),
                 new RegraBlackjack(), new ExecutorDeJogadaBlackjack<>(new NotificadorEventos()));
         Jogada incompativel = new Jogada() { };
@@ -72,7 +74,7 @@ class TratamentoDeExcecoesBlackjackTest {
         Jogador jogador = new JogadorAutomatico("Jogador", new MaoDeCartas<>(List.of(
                 new CartaTradicional(Naipe.COPAS, Valor.REI),
                 new CartaTradicional(Naipe.OUROS, Valor.DEZ))),
-                ignorado -> new JogadaBlackjack("PARAR"));
+                ignorado -> new JogadaBlackjack(AcaoBlackjack.PARAR));
         Baralho<CartaTradicional> baralho = new Baralho<>(List.of(
                 new CartaTradicional(Naipe.PAUS, Valor.DOIS)));
         ExecutorDeJogadaBlackjack<CartaTradicional> executor =
@@ -80,7 +82,7 @@ class TratamentoDeExcecoesBlackjackTest {
         Partida<CartaTradicional> partida = new PartidaBlackjack<>(List.of(jogador), baralho,
                 new RegraBlackjack(), executor);
 
-        executor.aplicar(new JogadaBlackjack("COMPRAR"), jogador, partida);
+        executor.aplicar(new JogadaBlackjack(AcaoBlackjack.COMPRAR), jogador, partida);
 
         assertEquals(List.of(EventoPadrao.CARTA_COMPRADA, EventoBlackjack.JOGADOR_ESTOUROU),
                 eventos.stream().map(Evento::getTipo).toList());
