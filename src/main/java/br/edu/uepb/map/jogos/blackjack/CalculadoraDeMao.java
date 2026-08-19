@@ -14,9 +14,6 @@ import java.util.Objects;
  * <p>Extraida de RegraBlackjack e EstrategiaBlackjack para nao duplicar essa
  * logica nas duas classes.</p>
  *
- * <p><b>Atencao, time:</b> pelo guia de construcao, essa conta e
- * responsabilidade do Jeff (classe CalculadoraDeMao). Combinar com ele se a
- * versao dele deve substituir esta — mantendo a assinatura
  * {@link #calcularPontuacao(Jogador)}, que e o que RegraBlackjack e
  * EstrategiaBlackjack chamam.</p>
  */
