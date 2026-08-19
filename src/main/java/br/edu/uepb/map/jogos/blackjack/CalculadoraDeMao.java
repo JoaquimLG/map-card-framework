@@ -35,50 +35,10 @@ public class CalculadoraDeMao {
             }
             Valor valor = cartaTradicional.getValor();
 
-            switch (valor) {
-                case AS:
-                    pontuacao += 11;
-                    quantidadeDeAses++;
-                    break;
+            pontuacao += obterValorNoBlackjack(valor);
 
-                case DOIS:
-                    pontuacao += 2;
-                    break;
-
-                case TRES:
-                    pontuacao += 3;
-                    break;
-
-                case QUATRO:
-                    pontuacao += 4;
-                    break;
-
-                case CINCO:
-                    pontuacao += 5;
-                    break;
-
-                case SEIS:
-                    pontuacao += 6;
-                    break;
-
-                case SETE:
-                    pontuacao += 7;
-                    break;
-
-                case OITO:
-                    pontuacao += 8;
-                    break;
-
-                case NOVE:
-                    pontuacao += 9;
-                    break;
-
-                case DEZ:
-                case VALETE:
-                case DAMA:
-                case REI:
-                    pontuacao += 10;
-                    break;
+            if (valor == Valor.AS) {
+                quantidadeDeAses++;
             }
         }
 
@@ -89,5 +49,20 @@ public class CalculadoraDeMao {
         }
 
         return pontuacao;
+    }
+
+    private int obterValorNoBlackjack(Valor valor) {
+        return switch (valor) {
+            case AS -> 11;
+            case DOIS -> 2;
+            case TRES -> 3;
+            case QUATRO -> 4;
+            case CINCO -> 5;
+            case SEIS -> 6;
+            case SETE -> 7;
+            case OITO -> 8;
+            case NOVE -> 9;
+            case DEZ, VALETE, DAMA, REI -> 10;
+        };
     }
 }
