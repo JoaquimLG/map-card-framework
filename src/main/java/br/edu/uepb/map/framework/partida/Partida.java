@@ -234,6 +234,8 @@ public abstract class Partida<T extends Carta> {
      * @throws NullPointerException se o jogador for nulo
      * @throws IllegalArgumentException se o jogador não participar
      *                                  desta partida
+     * @throws br.edu.uepb.map.framework.excecoes.BaralhoVazioException se o
+     *         baralho não possuir cartas
      */
     public T comprarCartaPara(Jogador jogador) {
 
@@ -477,7 +479,7 @@ public abstract class Partida<T extends Carta> {
     /**
      * Retorna o baralho utilizado pela partida.
      *
-     * @return baralho da partida
+     * @return baralho da partida, nunca {@code null}
      */
     public Baralho<T> getBaralho() {
         return baralho;

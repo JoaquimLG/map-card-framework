@@ -22,6 +22,7 @@ public final class FabricaBaralhoTradicional
      * dos quatro naipes e treze valores tradicionais.
      *
      * @param baralho baralho que receberá as 52 cartas tradicionais
+     * @throws NullPointerException se o baralho for {@code null}
      */
     @Override
     protected void adicionarCartas(

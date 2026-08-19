@@ -8,10 +8,10 @@ import java.util.Objects;
 
 /**
  * Representa algo que aconteceu durante uma partida (ex.: uma carta foi
- * comprada, um jogador parou ou estourou), usado pelo framework para
+ * comprada ou um jogador parou), usado pelo framework para
  * notificar interessados através de {@link NotificadorEventos}.
  *
- * <p>Um evento é imutável: guarda o {@link TipoEvento}, uma mensagem
+ * <p>Um evento é imutável: guarda um {@link TipoEvento}, uma mensagem
  * descritiva, o jogador relacionado (quando houver) e o momento em que
  * foi criado.</p>
  */

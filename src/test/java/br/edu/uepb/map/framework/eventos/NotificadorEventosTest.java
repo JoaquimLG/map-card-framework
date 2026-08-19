@@ -19,7 +19,7 @@ public class NotificadorEventosTest {
         notificador.adicionarOuvinte(recebidosPorA::add);
         notificador.adicionarOuvinte(recebidosPorB::add);
 
-        Evento evento = new Evento(TipoEvento.PARTIDA_INICIADA, "inicio da partida");
+        Evento evento = new Evento(EventoPadrao.PARTIDA_INICIADA, "inicio da partida");
         notificador.notificar(evento);
 
         assertEquals(1, recebidosPorA.size());
@@ -35,7 +35,7 @@ public class NotificadorEventosTest {
 
         notificador.adicionarOuvinte(ouvinte);
         notificador.removerOuvinte(ouvinte);
-        notificador.notificar(new Evento(TipoEvento.PARTIDA_FINALIZADA, "fim"));
+        notificador.notificar(new Evento(EventoPadrao.PARTIDA_FINALIZADA, "fim"));
 
         assertTrue(recebidos.isEmpty());
     }
@@ -65,11 +65,11 @@ public class NotificadorEventosTest {
         OuvinteEvento novoOuvinte = recebidos::add;
         notificador.adicionarOuvinte(evento -> notificador.adicionarOuvinte(novoOuvinte));
 
-        Evento primeiro = new Evento(TipoEvento.PARTIDA_INICIADA, "primeiro");
+        Evento primeiro = new Evento(EventoPadrao.PARTIDA_INICIADA, "primeiro");
         notificador.notificar(primeiro);
         assertTrue(recebidos.isEmpty());
 
-        Evento segundo = new Evento(TipoEvento.PARTIDA_FINALIZADA, "segundo");
+        Evento segundo = new Evento(EventoPadrao.PARTIDA_FINALIZADA, "segundo");
         notificador.notificar(segundo);
         assertEquals(List.of(segundo), recebidos);
     }

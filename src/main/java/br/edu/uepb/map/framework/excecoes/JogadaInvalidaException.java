@@ -3,7 +3,12 @@ package br.edu.uepb.map.framework.excecoes;
 import br.edu.uepb.map.framework.jogador.Jogada;
 import br.edu.uepb.map.framework.jogador.Jogador;
 
-// indica que um jogador fez uma jogada que RegraJogo não permite no estado atual da partida
+/**
+ * Indica que uma regra do jogo rejeitou a jogada de um jogador.
+ *
+ * <p>A exceção mantém as referências recebidas para que quem a tratar possa
+ * identificar a tentativa que falhou. Essas referências podem ser nulas.</p>
+ */
 public class JogadaInvalidaException extends IllegalStateException {
 
     private final transient Jogador jogador;
@@ -24,10 +29,20 @@ public class JogadaInvalidaException extends IllegalStateException {
         this.jogada = jogada;
     }
 
+    /**
+     * Retorna o jogador que tentou a jogada rejeitada.
+     *
+     * @return o jogador informado na criação da exceção, ou {@code null}
+     */
     public Jogador getJogador() {
         return jogador;
     }
 
+    /**
+     * Retorna a jogada rejeitada pela regra.
+     *
+     * @return a jogada informada na criação da exceção, ou {@code null}
+     */
     public Jogada getJogada() {
         return jogada;
     }

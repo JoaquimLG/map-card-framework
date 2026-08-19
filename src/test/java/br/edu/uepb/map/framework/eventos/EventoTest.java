@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EventoTest {
     @Test
     void deveCriarEventoComTipoEMensagemSemJogador() {
-        Evento evento = new Evento(TipoEvento.CARTA_COMPRADA, "carta comprada do topo");
+        Evento evento = new Evento(EventoPadrao.CARTA_COMPRADA, "carta comprada do topo");
 
-        assertEquals(TipoEvento.CARTA_COMPRADA, evento.getTipo());
+        assertEquals(EventoPadrao.CARTA_COMPRADA, evento.getTipo());
         assertEquals("carta comprada do topo", evento.getMensagem());
         assertNull(evento.getJogador());
         assertNotNull(evento.getMomento());
@@ -34,7 +34,7 @@ public class EventoTest {
     @Test
     void deveRejeitarMensagemNula() {
         assertThrows(NullPointerException.class,
-                () -> new Evento(TipoEvento.PARTIDA_INICIADA, null));
+                () -> new Evento(EventoPadrao.PARTIDA_INICIADA, null));
     }
 
     @Test
@@ -42,18 +42,23 @@ public class EventoTest {
         Jogador jogador = new JogadorHumano(
                 "Ana", new MaoDeCartas<Carta>(), new Scanner(System.in), acao -> null);
 
-        Evento evento = new Evento(TipoEvento.JOGADOR_ESTOUROU, "estourou 21", jogador);
+        Evento evento = new Evento(TipoEventoDeTeste.EVENTO_DO_JOGO, "evento do jogo", jogador);
         String texto = evento.toString();
 
-        assertTrue(texto.contains("JOGADOR_ESTOUROU"));
-        assertTrue(texto.contains("estourou 21"));
+        assertEquals(TipoEventoDeTeste.EVENTO_DO_JOGO, evento.getTipo());
+        assertTrue(texto.contains("EVENTO_DO_JOGO"));
+        assertTrue(texto.contains("evento do jogo"));
         assertTrue(texto.contains("Ana"));
     }
 
     @Test
     void toStringSemJogadorNaoContemParenteses() {
-        Evento evento = new Evento(TipoEvento.PARTIDA_INICIADA, "inicio da partida");
+        Evento evento = new Evento(EventoPadrao.PARTIDA_INICIADA, "inicio da partida");
 
         assertTrue(evento.toString().contains("PARTIDA_INICIADA"));
+    }
+
+    private enum TipoEventoDeTeste implements TipoEvento {
+        EVENTO_DO_JOGO
     }
 }

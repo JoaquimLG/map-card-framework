@@ -55,8 +55,11 @@
         <mxCell id="evento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Evento&lt;/b&gt;&lt;hr&gt;- tipo: TipoEvento&lt;br&gt;- mensagem: String&lt;br&gt;- jogador: Jogador [0..1]&lt;br&gt;- momento: LocalDateTime" vertex="1">
           <mxGeometry height="145" width="230" x="1540" y="740" as="geometry" />
         </mxCell>
-        <mxCell id="tipoEvento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;TipoEvento&lt;/b&gt;" vertex="1">
+        <mxCell id="tipoEvento" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;TipoEvento&lt;/b&gt;" vertex="1">
           <mxGeometry height="70" width="180" x="1570" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="eventoPadrao" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;EventoPadrao&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="180" x="1570" y="1090" as="geometry" />
         </mxCell>
         <mxCell id="consoleOuvinte" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ConsoleOuvinte&lt;/b&gt;&lt;hr&gt;+ aoReceberEvento(Evento): void" vertex="1">
           <mxGeometry height="90" width="250" x="930" y="1000" as="geometry" />
@@ -135,6 +138,9 @@
         <mxCell id="e17" edge="1" parent="1" source="consoleOuvinte" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="ouvinte">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="eventoPadrao" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="tipoEvento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -197,6 +203,12 @@
         <mxCell id="bNotificador" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;NotificadorEventos&lt;/b&gt;&lt;hr&gt;+ adicionarOuvinte(...): void&lt;br&gt;+ notificar(Evento): void" vertex="1">
           <mxGeometry height="105" width="240" x="1490" y="190" as="geometry" />
         </mxCell>
+        <mxCell id="iTipoEvento" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;&amp;laquo;interface&amp;raquo;&lt;br&gt;TipoEvento&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="210" x="1490" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="eventoBj" parent="b1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;EventoBlackjack&lt;/b&gt;&lt;hr&gt;JOGADOR_ESTOUROU" vertex="1">
+          <mxGeometry height="100" width="230" x="1490" y="640" as="geometry" />
+        </mxCell>
         <mxCell id="be3" edge="1" parent="b1" source="estBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="iEstrategia">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -240,6 +252,9 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points"><mxPoint x="1610" y="840" /><mxPoint x="1610" y="330" /></Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="beTipoEvento" edge="1" parent="b1" source="eventoBj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;" target="iTipoEvento">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="note" parent="b1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=8;" value="&lt;b&gt;Padrões evidenciados&lt;/b&gt;&lt;br&gt;Template Method: Partida&lt;br&gt;Factory: FabricaBaralho&lt;br&gt;Strategy: Estrategia&lt;br&gt;Observer: NotificadorEventos + OuvinteEvento" vertex="1">
           <mxGeometry height="150" width="350" x="80" y="900" as="geometry" />

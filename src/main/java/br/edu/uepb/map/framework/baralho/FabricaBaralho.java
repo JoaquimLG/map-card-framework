@@ -29,7 +29,8 @@ public abstract class FabricaBaralho<T extends Carta> {
      * <p>Este é o ponto de extensão utilizado pelas subclasses
      * para definir a composição específica do baralho.</p>
      *
-     * @param baralho baralho que receberá as cartas
+     * @param baralho baralho vazio criado por {@link #criar()}, que receberá
+     *                as cartas da composição
      */
     protected abstract void adicionarCartas(Baralho<T> baralho);
 }

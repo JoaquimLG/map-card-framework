@@ -2,8 +2,8 @@ package br.edu.uepb.map.jogos.blackjack;
 
 import br.edu.uepb.map.framework.cartas.Carta;
 import br.edu.uepb.map.framework.eventos.Evento;
+import br.edu.uepb.map.framework.eventos.EventoPadrao;
 import br.edu.uepb.map.framework.eventos.NotificadorEventos;
-import br.edu.uepb.map.framework.eventos.TipoEvento;
 import br.edu.uepb.map.framework.jogador.Jogada;
 import br.edu.uepb.map.framework.jogador.Jogador;
 import br.edu.uepb.map.framework.partida.ExecutorDeJogada;
@@ -55,17 +55,17 @@ public class ExecutorDeJogadaBlackjack<T extends Carta> implements ExecutorDeJog
     private void aplicarCompra(Jogador jogador, Partida<T> partida) {
         T carta = partida.comprarCartaPara(jogador);
         notificador.notificar(new Evento(
-                TipoEvento.CARTA_COMPRADA, "comprou " + carta.getDescricao(), jogador));
+                EventoPadrao.CARTA_COMPRADA, "comprou " + carta.getDescricao(), jogador));
 
         if (calculadora.calcularPontuacao(jogador) > 21) {
             jogador.desativar();
             notificador.notificar(new Evento(
-                    TipoEvento.JOGADOR_ESTOUROU, "estourou 21 pontos", jogador));
+                    EventoBlackjack.JOGADOR_ESTOUROU, "estourou 21 pontos", jogador));
         }
     }
 
     private void aplicarParada(Jogador jogador) {
         jogador.desativar();
-        notificador.notificar(new Evento(TipoEvento.JOGADOR_PAROU, "decidiu parar", jogador));
+        notificador.notificar(new Evento(EventoPadrao.JOGADOR_PAROU, "decidiu parar", jogador));
     }
 }

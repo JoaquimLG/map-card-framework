@@ -10,8 +10,8 @@ import br.edu.uepb.map.framework.baralho.FabricaBaralhoTradicional;
 import br.edu.uepb.map.framework.cartas.CartaTradicional;
 import br.edu.uepb.map.framework.eventos.ConsoleOuvinte;
 import br.edu.uepb.map.framework.eventos.Evento;
+import br.edu.uepb.map.framework.eventos.EventoPadrao;
 import br.edu.uepb.map.framework.eventos.NotificadorEventos;
-import br.edu.uepb.map.framework.eventos.TipoEvento;
 import br.edu.uepb.map.framework.excecoes.JogadaInvalidaException;
 import br.edu.uepb.map.framework.jogador.Jogada;
 import br.edu.uepb.map.framework.jogador.Jogador;
@@ -110,7 +110,7 @@ public class JogoBlackjack {
         new ExecutorDeJogadaBlackjack<>(notificador));
 
 partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
-        notificador.notificar(new Evento(TipoEvento.PARTIDA_INICIADA, "nova rodada de Blackjack"));
+        notificador.notificar(new Evento(EventoPadrao.PARTIDA_INICIADA, "nova rodada de Blackjack"));
 
         System.out.println();
         mostrarMao(jogador);
@@ -128,7 +128,7 @@ partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
             try {
                 partida.jogarTurno();
             } catch (JogadaInvalidaException excecao) {
-                notificador.notificar(new Evento(TipoEvento.JOGADA_INVALIDA, excecao.getMessage(), daVez));
+                notificador.notificar(new Evento(EventoPadrao.JOGADA_INVALIDA, excecao.getMessage(), daVez));
                 System.out.println("Jogada inválida, tente novamente.");
                 continue;
             }
@@ -138,7 +138,7 @@ partida.iniciar(CARTAS_INICIAIS_POR_JOGADOR);
             }
         }
 
-        notificador.notificar(new Evento(TipoEvento.PARTIDA_FINALIZADA, "rodada encerrada"));
+        notificador.notificar(new Evento(EventoPadrao.PARTIDA_FINALIZADA, "rodada encerrada"));
 
         System.out.println();
         System.out.println("Resultado final:");
